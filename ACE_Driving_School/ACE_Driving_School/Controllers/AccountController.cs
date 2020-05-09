@@ -16,6 +16,7 @@ using System.Web.DynamicData;
 
 namespace ACE_Driving_School.Controllers
 {
+    //this is a comment
     [Authorize]
     public class AccountController : Controller
     {
