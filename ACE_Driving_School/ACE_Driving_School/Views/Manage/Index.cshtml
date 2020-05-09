@@ -33,10 +33,20 @@
         <dd>@Model.EmailConfirmed</dd>
         }
 
+        <dt>Test Date:</dt>
+        @if (Model.TestDate.HasValue)
+        {
+            <dd>@String.Format("dd/MM/yyyy HH:mm", Model.TestDate)</dd>
+        }
+        else
+        {
+            <dd>No test dates booked</dd>
+        }
+
        <a href="https://www.gov.uk/book-driving-test" class="btn btn-primary">Book Your Driving Test</a> 
 
 
-        @Html.ActionLink("Edit Details","EditAccountDetails", "Account" , new { @class = "btn btn-danger"})
+        @Html.ActionLink("Edit Details","EditStudentAccountDetails", "Account",null, new { @class = "btn btn-danger"})
 
 
     </dl>

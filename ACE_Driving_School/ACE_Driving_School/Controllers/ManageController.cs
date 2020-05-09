@@ -72,17 +72,19 @@ namespace ACE_Driving_School.Controllers
                 : "";
 
             var userId = User.Identity.GetUserId();
-            User user = context.Users.Find(userId);
+            Student user = (Student)context.Users.Find(userId);
             string emailConfirmed = user.EmailConfirmed == true ? "Yes" : "No";
             var model = new IndexViewModel
             {
                 HasPassword = HasPassword(),
+                TestDate = user.TestDate,
                 PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
                 Logins = await UserManager.GetLoginsAsync(userId),
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId),
                 EmailConfirmed = emailConfirmed
             };
+            
             return View(model);
         }
 

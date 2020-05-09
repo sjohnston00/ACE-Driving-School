@@ -329,6 +329,7 @@
     <Content Include="Views\Instructor\InstructorAccount.cshtml" />
     <Content Include="Views\Instructor\EditDetails.cshtml" />
     <Content Include="Views\Account\ChangePhoneNumber.cshtml" />
+    <Content Include="Views\Account\EditStudentAccountDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

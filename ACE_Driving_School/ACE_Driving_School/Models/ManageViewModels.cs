@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
@@ -9,6 +10,9 @@ namespace ACE_Driving_School.Models
     {
         public bool HasPassword { get; set; }
         public string EmailConfirmed { get; set; }
+
+        [DataType(DataType.DateTime)]
+        public DateTime? TestDate { get; set; }
         public IList<UserLoginInfo> Logins { get; set; }
         public string PhoneNumber { get; set; }
         public bool TwoFactor { get; set; }

@@ -16,7 +16,6 @@ using System.Web.DynamicData;
 
 namespace ACE_Driving_School.Controllers
 {
-    //this is a comment
     [Authorize]
     public class AccountController : Controller
     {
@@ -67,12 +66,61 @@ namespace ACE_Driving_School.Controllers
             return View();
         }
 
-        public ActionResult EditAccountDetails()
+        [HttpGet]
+        public ActionResult EditStudentAccountDetails()
         {
-            if (User.Identity.IsAuthenticated)
+            if (!User.Identity.IsAuthenticated)
                 return RedirectToAction("Login");
+            if (User.IsInRole("Instructor"))
+                return RedirectToAction("EditInstructorAccountDetails");
 
             string Student_Id = User.Identity.GetUserId();
+            Student student = (Student)context.Users.Find(Student_Id);
+
+            return View(student);
+        }
+
+        [HttpPost]
+        public ActionResult EditStudentAccountDetails(Student model)
+        {
+            if (!User.Identity.IsAuthenticated)
+                return RedirectToAction("Login");
+
+            Student CurrentStudentInDB = (Student)context.Users.Find(model.Id);
+
+            CurrentStudentInDB.First_Name = model.First_Name;
+            CurrentStudentInDB.Last_Name = model.Last_Name;
+            CurrentStudentInDB.AddressLine1 = model.AddressLine1;
+            CurrentStudentInDB.AddressLine2 = model.AddressLine2;
+            CurrentStudentInDB.City = model.City;
+            CurrentStudentInDB.Postcode = model.Postcode;
+            CurrentStudentInDB.Email = model.Email;
+            CurrentStudentInDB.PhoneNumber = model.PhoneNumber;
+            CurrentStudentInDB.TestDate = model.TestDate;
+
+            context.SaveChanges();
+
+            return RedirectToAction("Index", "Manage");
+        }
+        
+        [HttpGet]
+        public ActionResult EditInstructorAccountDetails()
+        {
+            if (!User.Identity.IsAuthenticated)
+                return RedirectToAction("Login");
+
+
+            string Instructor_Id = User.Identity.GetUserId();
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult EditInstructorAccountDetails(User model)
+        {
+            if (!User.Identity.IsAuthenticated)
+                return RedirectToAction("Login");
+
 
             return View();
         }
