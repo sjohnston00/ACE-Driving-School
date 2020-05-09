@@ -1,0 +1,43 @@
+﻿@model ACE_Driving_School.Models.Instructor
+
+@{
+    ViewBag.Title = "Instructor Description";
+}
+
+<h2>@Model.FullName</h2>
+
+<p>Image Here</p>
+
+@if (Model.Current_Students.Count() == 0 || Model.Current_Students == null)
+{
+    //Instructor doesnt have any current students
+    <p>This instructor has no current students</p>
+}
+else //Instructor has student then print them
+{
+    <p>Most Recent Passed Studenst</p>
+    <table class="table table-bordered table-hover">
+        <tr>
+            <th>Students</th>
+        </tr>
+        @foreach (var item in Model.Current_Students)
+        {
+            <tr>
+                <td>@item.FullName</td>
+            </tr>
+        }
+
+    </table>
+}
+
+
+<p>Bio: @Model.Bio</p>
+
+@if (User.IsInRole("Student"))
+{
+    //develop if ahead
+    @Html.ActionLink("Booking A Lesson With This Instructor", "CreateBooking", "Booking")
+}
+
+
+

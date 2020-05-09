@@ -1,0 +1,85 @@
+﻿@model ACE_Driving_School.Models.Booking
+
+@{
+    ViewBag.Title = "Pay For Booking";
+}
+
+<h2>Pay For Booking</h2>
+
+<div>
+    <h4>Booking</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Lesson_Amount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Lesson_Amount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date_and_Time)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date_and_Time)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+    </dl>
+    <table class="table table-hover" >
+        <tr>
+            <th>@Html.DisplayNameFor(p => p.Lessons.First().Date_And_Time)</th>
+            <th>@Html.DisplayNameFor(p => p.Lessons.First().Instructor.FullName)</th>
+            <th>@Html.DisplayNameFor(p => p.Lessons.First().Car.Name)</th>
+        </tr>
+        @foreach (var item in Model.Lessons)
+        {
+            <tr>
+                <td>@Html.DisplayFor(p => item.Date_And_Time)</td>
+                <td>@Html.DisplayFor(p => item.Instructor.FullName)</td>
+                <td>@Html.DisplayFor(p => item.Car.Name)</td>
+            </tr>
+        }
+    </table>
+</div>
+<p>
+    @Html.ActionLink("Edit", "UpdateBooking", "Booking", new { Booking_Id = Model.Booking_Id }, null) |
+    @Html.ActionLink("Home", "Index", "Home")
+</p>
+
+@{ var Client_ID = ViewBag.Client_ID;}
+<script src="https://www.paypal.com/sdk/js?client-id=@Client_ID&currency=GBP">
+    // Required. Replace SB_CLIENT_ID with your sandbox client ID.
+</script>
+
+<div id="paypal-button-container"></div>
+
+<script>
+    paypal.Buttons({
+    createOrder: function(data, actions) {
+      // This function sets up the details of the transaction, including the amount and line item details.
+      return actions.order.create({
+        purchase_units: [{
+          amount: {
+            value: '@Model.Price'
+          }
+        }]
+      });
+    },
+        onApprove: function (data, actions) {
+        // This function captures the funds from the transaction.
+        return actions.order.capture().then(function (details) {
+            // This function shows a transaction success message to your buyer.
+            window.location.href = '@Url.Action("BookingConfirmation","Booking", new { Booking_Id = Model.Booking_Id})'
+        });
+    }
+  }).render('#paypal-button-container');    
+</script>

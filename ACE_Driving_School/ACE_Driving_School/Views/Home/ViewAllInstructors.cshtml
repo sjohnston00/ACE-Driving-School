@@ -1,0 +1,29 @@
+﻿@model IEnumerable<ACE_Driving_School.Models.User>
+
+@{
+    ViewBag.Title = "ViewAllInstructors";
+}
+
+<h2>Our Instructors</h2>
+
+<table class="table table-bordered table-hover">
+    <tr>
+        <th>@Html.DisplayNameFor(p => p.FullName)</th>
+        <th>@Html.DisplayNameFor(p => p.Email)</th>
+        <th>@Html.DisplayNameFor(p => p.PhoneNumber)</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        if (item.CurrentRole.Equals("Instructor"))
+        {
+            <tr>
+                <td>@Html.ActionLink($"{item.FullName}","InstructorDescription","Home", new { Instructor_Username = item.UserName }, null)</td>
+                <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                <td>@Html.DisplayFor(modelItem => item.PhoneNumber)</td>
+            </tr>
+        }
+    }
+</table>
+<p>@Html.ActionLink("Home","Index","Home")</p>
+

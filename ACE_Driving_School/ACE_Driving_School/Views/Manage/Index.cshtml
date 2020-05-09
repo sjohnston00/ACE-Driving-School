@@ -1,0 +1,43 @@
+﻿@model ACE_Driving_School.Models.IndexViewModel
+@{
+    ViewBag.Title = "Manage";
+}
+
+
+<p class="text-success">@ViewBag.StatusMessage</p>
+<div>
+    <h1>Change your account settings</h1>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>Password:</dt>
+        <dd>
+            [
+            @if (Model.HasPassword)
+            {
+                @Html.ActionLink("Change your password", "ChangePassword")
+            }
+            ]
+        </dd>
+        <dt>Phone Number:</dt>
+        <dd>
+            @(Model.PhoneNumber ?? "None")
+            [ @Html.ActionLink("ChangePhoneNumber","ChangePhoneNumber", "Account") ]
+
+        </dd>
+        <dt>Email Confirmed:</dt>
+        @if (Model.EmailConfirmed == "No")
+        {
+            <dd>@Model.EmailConfirmed <span>You will first need to confirm your email and telephone number before you can make bookings</span> </dd>
+        }
+        else { 
+        <dd>@Model.EmailConfirmed</dd>
+        }
+
+       <a href="https://www.gov.uk/book-driving-test" class="btn btn-primary">Book Your Driving Test</a> 
+
+
+        @Html.ActionLink("Edit Details","EditAccountDetails", "Account" , new { @class = "btn btn-danger"})
+
+
+    </dl>
+</div>

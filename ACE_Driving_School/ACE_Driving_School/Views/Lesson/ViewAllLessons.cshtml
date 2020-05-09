@@ -1,0 +1,84 @@
+﻿@model IEnumerable<ACE_Driving_School.Models.Lesson>
+
+@{
+    ViewBag.Title = "ViewAllLessons";
+}
+
+<h2>View All Lessons</h2>
+
+@if (User.IsInRole("Student"))
+{
+    <p>@Html.ActionLink("Make a New Booking", "CreateBooking", "Booking")</p>
+}
+
+<table class="table">
+    <tr>
+        @if (User.IsInRole("Admin"))
+        {
+            <th>
+                Student
+            </th>
+        }
+
+        <th>
+            @Html.DisplayNameFor(model => model.Date_And_Time)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Duration)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Instructor_Note)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Booking_Id)
+        </th>
+        <th>
+            Instructor Name
+        </th>
+        <th>
+            Car
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    @if (User.IsInRole("Admin"))
+    {
+        <td>
+            @Html.DisplayFor(model => item.Student.UserName)
+        </td>
+    }
+    <td>
+        @Html.DisplayFor(modelItem => item.Date_And_Time)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Duration) hours
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Status)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Instructor_Note)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Booking_Id)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Instructor.FullName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Car.Name)
+    </td>
+        <td>
+            @Html.ActionLink("Edit", "EditLesson", new { Lesson_Id = item.Lesson_Id }) |
+            @Html.ActionLink("Details", "LessonDetails", new { Lesson_Id = item.Lesson_Id }) |
+            @Html.ActionLink("Delete", "DeleteLesson", new { Lesson_Id = item.Lesson_Id })
+        </td>
+</tr>
+}
+
+</table>

@@ -1,0 +1,60 @@
+﻿@model ACE_Driving_School.View_Models.LessonAmounts_ViewModel
+@{
+    ViewBag.Title = "ChooseLessonAmount";
+}
+
+
+
+@using (Html.BeginForm("ChooseLessonAmount", "Booking"))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <h4>Choose Lesson Amount</h4>
+        <hr />
+        <div class="form-group">
+            <div class="col-md-10">
+                @Html.DropDownListFor(p => p.chossen_Amount, new SelectList(Model.Lesson_Amount), new { @class= "form-control", @onchange="GetPrice()"})
+            </div>
+            <p>Price: <span id="price">£20</span></p>
+        </div>
+        
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="submit" class="btn btn-primary">Confirm</button>
+            </div>
+        </div>
+        <script>
+            function GetPrice() {
+                var price;
+                var amount = document.getElementById('chossen_Amount').value;
+                switch (amount) {
+                    case '1':
+                        var price = "£20";
+                        document.getElementById('price').innerHTML = price;
+                        break;
+                    case '2':
+                        var price = "£40";
+                        document.getElementById('price').innerHTML = price;
+                        break;
+                    case '5':
+                        var price = "£95";
+                        document.getElementById('price').innerHTML = price;
+                        break;
+                    case '10':
+                        var price = "£180";
+                        document.getElementById('price').innerHTML = price;
+                        break;
+                    case '20':
+                        var price = "£350";
+                        document.getElementById('price').innerHTML = price;
+                        break;
+                    default:
+                        var price = "";
+                        document.getElementById('price').innerHTML = price;
+                }
+            }
+        </script>
+    </div>
+}
+
+

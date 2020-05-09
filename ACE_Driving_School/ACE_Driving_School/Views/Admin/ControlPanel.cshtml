@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewBag.Title = "Control Panel";
+}
+
+<h2> Admin Control Panel</h2>
+
+@Html.ActionLink("New Staff Member", "NewStaffMember", null, new { @class = "btn btn-primary" })
+<hr />
+@Html.ActionLink("View All Users", "View All Users", null, new { @class = "btn btn-primary" })
+<hr />
+@Html.ActionLink("Change Lesson Prices", "ChangeLessonPrice", null, new { @class = "btn btn-primary" })
+<hr />
+@Html.ActionLink("Generate Reports", "GenerateReports", null, new { @class = "btn btn-primary" })
+

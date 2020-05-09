@@ -1,0 +1,7 @@
+Business Account:
+Email: sb-ymxqk1568453@business.example.com
+Password: lfV7r2/b
+
+Personal Account: 
+Email: sb-megt815404137-1@personal.example.com
+Password: Tester123456

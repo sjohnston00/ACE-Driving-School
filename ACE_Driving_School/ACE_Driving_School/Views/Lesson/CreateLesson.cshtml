@@ -1,0 +1,64 @@
+﻿@model ACE_Driving_School.View_Models.CreateLessonViewModel
+
+@{
+    ViewBag.Title = "Create Lesson";
+}
+<h2>Create A Lesson </h2>
+<h4>Choosen amount of Lessons @Model.Choosen_Amount</h4>
+
+        
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Dates, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Chossen_Date, new SelectList(Model.Dates), new { @class = "form-control", data_val = false })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Times, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Chossen_Time, new SelectList(Model.Times), new { @class = "form-control", data_val = false })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Duration, htmlAttributes: new { @class = "control-label col-md-2" }) 
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Choosen_Hours, new SelectList(Model.Duration), "Select Duration", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Duration, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Instructors, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Chossen_Instructor.Id, new SelectList(Model.Instructors, "Id", "Fullname"), "Select And Instructor", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Chossen_Instructor.Id, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Car_Type, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Car_Type_Chossen, new SelectList(Model.Car_Type), "Select Car Type", new { @class = "form-control" })
+            </div>
+        </div>
+        @Html.HiddenFor(m => m.Choosen_Amount)
+        @Html.HiddenFor(m => m.LessonInBooking)
+        @Html.HiddenFor(m => m.Booking_Id)
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,32 @@
+﻿@model IEnumerable<ACE_Driving_School.Models.Student>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>ACE Driving School</h1>
+</div>
+
+<h1>Most Reccent Passed Students</h1>
+<table class="table table-bordered table-hover">
+    <tr>
+        <th>Students</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.FullName</td>
+        </tr>
+    }
+</table>
+
+
+@Html.ActionLink("Our Instrutors","ViewAllInstructors","Home")
+<br />
+<br />
+@Html.ActionLink("Make A Booking","ChooseLessonAmount","Booking")
+@if (User.IsInRole("Student"))
+{
+    Html.ActionLink("View All Lessons", "ViewAllLessons", "Lesson");
+}
