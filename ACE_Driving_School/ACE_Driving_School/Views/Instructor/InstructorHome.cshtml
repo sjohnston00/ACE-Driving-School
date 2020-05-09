@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewBag.Title = "Instructor Home";
+}
+
+<h2>Instructor Home</h2>
+
+@Html.ActionLink("View Todays Lessons","TodaysLessons")
+<hr />  
+@Html.ActionLink("Reports","GeneratePDFReports")
+<hr />
+@Html.ActionLink("View All My Lessons", "AllLessons")
+<hr />
+@Html.ActionLink("View All My Bookings", "AllBookings")
+<hr />
+@Html.ActionLink("Mark Student As Passed", "Mark Student as Passed") @*Get all the students with the same recent isntructor ID as this instructor and display them*@ 
+

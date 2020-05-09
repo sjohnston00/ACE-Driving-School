@@ -14,6 +14,10 @@ namespace ACE_Driving_School.Controllers
         private ACE_Driving_School_Db_Context context = new ACE_Driving_School_Db_Context();
         public ActionResult InstructorHome()
         {
+            if (!User.Identity.IsAuthenticated)
+                return RedirectToAction("Login", "Account");
+            
+
             return View();
         }
 
@@ -72,13 +76,6 @@ namespace ACE_Driving_School.Controllers
 
             return View();
         }
-
-        public ActionResult AddNote()
-        {
-
-            return View();
-        }
-
 
         public List<DateTime> GetInstructorAvailability(DateTime date)
         {
