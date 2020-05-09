@@ -72,7 +72,7 @@ namespace ACE_Driving_School.Controllers
             if (!User.Identity.IsAuthenticated)
                 return RedirectToAction("Login");
             if (User.IsInRole("Instructor"))
-                return RedirectToAction("EditInstructorAccountDetails");
+                return RedirectToAction("EditDetails", "Instructor");
 
             string Student_Id = User.Identity.GetUserId();
             Student student = (Student)context.Users.Find(Student_Id);
@@ -101,28 +101,6 @@ namespace ACE_Driving_School.Controllers
             context.SaveChanges();
 
             return RedirectToAction("Index", "Manage");
-        }
-        
-        [HttpGet]
-        public ActionResult EditInstructorAccountDetails()
-        {
-            if (!User.Identity.IsAuthenticated)
-                return RedirectToAction("Login");
-
-
-            string Instructor_Id = User.Identity.GetUserId();
-
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult EditInstructorAccountDetails(User model)
-        {
-            if (!User.Identity.IsAuthenticated)
-                return RedirectToAction("Login");
-
-
-            return View();
         }
 
         public void SendEmail(IdentityMessage message)

@@ -28,6 +28,8 @@ namespace ACE_Driving_School.Controllers
         [HttpGet]
         public ActionResult EditDetails()
         {
+            if (!User.Identity.IsAuthenticated)
+                return RedirectToAction("Login", "Account");
             string InstructorId = User.Identity.GetUserId();
             Instructor instructor = (Instructor)context.Users.Find(InstructorId);
             return View(instructor);
