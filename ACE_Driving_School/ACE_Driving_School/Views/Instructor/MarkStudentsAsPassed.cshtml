@@ -1,0 +1,55 @@
+﻿@model IEnumerable<ACE_Driving_School.Models.Student>
+
+@{
+    ViewBag.Title = "Mark Students As Passed";
+}
+
+<h2>Mark Students As Passed</h2>
+
+@if (!Model.Any())
+{
+    <p>You have no current students</p>
+}
+else
+{
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DrivingLicenseNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TestDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.hasPassed)
+            </th>
+        </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FullName)
+            </td>
+        
+            <td>
+                @Html.DisplayFor(modelItem => item.DrivingLicenseNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TestDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.hasPassed)
+            </td>
+            <td>
+                @Html.ActionLink("Mark as Passed", "MarkStudentAsPassed", new { Student_Id = item.Id }, new { onclick = "return confirm('Are you sure this student has passed his practical driving test?')"})
+            </td>
+        </tr>
+    }
+
+    </table>
+}
+@Html.ActionLink("Back", "InstructorHome")

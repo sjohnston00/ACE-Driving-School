@@ -104,7 +104,10 @@ namespace ACE_Driving_School.Models
                         City = "Glasgow",
                         Postcode = "G4 0PY",
                         PhoneNumber = "07498508958",
-                        Most_Recent_Instructor_Id = instructor1.Id
+                        Most_Recent_Instructor_Id = instructor1.Id,
+                        DrivingLicenseNo = "MORGA753116SM9IJ",
+                        hasPassed = false,
+                        TestDate = DateTime.Now.Date.AddDays(-1)
                     };
                     userManager.Create(student1, "student1");
                     userManager.AddToRole(student1.Id, "Student");

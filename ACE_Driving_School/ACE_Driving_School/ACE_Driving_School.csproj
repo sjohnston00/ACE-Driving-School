@@ -332,6 +332,7 @@
     <Content Include="Views\Account\EditStudentAccountDetails.cshtml" />
     <Content Include="Views\Instructor\InstructorHome.cshtml" />
     <Content Include="Views\Instructor\TodaysLessons.cshtml" />
+    <Content Include="Views\Instructor\MarkStudentsAsPassed.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

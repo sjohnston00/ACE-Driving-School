@@ -108,22 +108,25 @@ namespace ACE_Driving_School.Controllers
 
             return View(Todays_Lessons);
         }
-
-        public ActionResult ViewAllLessons()
-        {
-            return View();
-        }
-        public ActionResult ViewAllBookings()
-        {
-            return View();
-        }
-
         public ActionResult MarkStudentsAsPassed()
         {
-             //Get all the students with the same recent isntructor ID as this instructor and display them
-            return View();
-        }
+            if (!User.Identity.IsAuthenticated)
+                return RedirectToAction("Login", "Account");
 
+            //Get all the students with the same recent isntructor ID as this instructor and display them
+            string Instructor_Id = User.Identity.GetUserId();
+            List<Student> Instructors_Students = context.Users.OfType<Student>()
+                                                              .Where(p => p.Most_Recent_Instructor_Id == Instructor_Id)
+                                                              .ToList();
+            return View(Instructors_Students);
+        }
+        public ActionResult MarkStudentAsPassed(string Student_Id)
+        {
+            Student student = (Student)context.Users.Find(Student_Id);
+            student.hasPassed = true;
+            context.SaveChanges();
+            return RedirectToAction("MarkStudentsAsPassed");
+        }
         public List<DateTime> GetInstructorAvailability(DateTime date)
         {
             return new List<DateTime>() { date};

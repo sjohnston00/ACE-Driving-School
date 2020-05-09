@@ -85,7 +85,7 @@ namespace ACE_Driving_School.Controllers
         {
             //get the most recent students from the database that have passed
             List<Student> Most_Recent_Passed_Students = context.Users.OfType<Student>()
-                                                        .Where(p => p.hasPassed == false) //changen to true after
+                                                        .Where(p => p.hasPassed == false) //change to true after
                                                         .OrderBy(p => p.PassedDate).ToList();
             return (Most_Recent_Passed_Students);
         }
@@ -96,13 +96,14 @@ namespace ACE_Driving_School.Controllers
         /// <returns>A list of student for the passed in instructor</returns>
         public List<Student> Get_Instructor_Most_Recent_Passed_Students(Instructor instructor)
         {
-            //---NEED TO ADD THE MOST_RECENT_INSTRUCTOR_ID VALUE TO DATABASE
             //---THIS GETS ALL THE STUDENT THAT HAVE PASSED FROM THAT INSTRUCTOR
             List<Student> Instructors_Students = context.Users.OfType<Student>()
                                                   .Where(p => p.Most_Recent_Instructor_Id == instructor.Id)
-                                                  .Where(p => p.hasPassed)
+                                                  .Where(p => p.hasPassed == false) //change to true after
                                                   .OrderBy(p => p.PassedDate)
                                                   .ToList();
+
+
             //NOW WE GET THE FIRST 6 STUDENTS
             //List<Student> Instructor_First_6_Students = (List<Student>)Instructors_Students.Take(6);
             //this also doesnt throw an expection when there arent enough students in the list
