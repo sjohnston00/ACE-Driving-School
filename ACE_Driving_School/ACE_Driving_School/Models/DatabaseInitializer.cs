@@ -154,29 +154,16 @@ namespace ACE_Driving_School.Models
                         Student = student1,
                         Car = car1
                     };
-
-                    //----------creating a payment for booking------------
-                    var payment1 = new Payment
-                    {
-                        Payment_Id = "1",
-                        Amount = booking1.Price,
-                        Date = booking1.Date_and_Time,
-                        Status = "Paid",
-                        Student = student1,
-                    };
                     //---ADDING THE REST OF THE REFERNCES TO THE BOOKING
                         //adding the lesson to the booking
                         booking1.Lessons = new List<Lesson>() { lesson1 };
                         booking1.Lesson_Amount = booking1.Lessons.Count;
-                        //adding payment to the booking
-                        booking1.Payment = payment1;
 
                     //adding all the objects to the database
                     context.Bookings.Add(booking1);
                     context.Cars.Add(car1);
                     context.Cars.Add(car2);
                     context.Lessons.Add(lesson1);
-                    context.Payments.Add(payment1);
                     context.SaveChanges();
 
                 }

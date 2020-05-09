@@ -11,7 +11,6 @@ namespace ACE_Driving_School.Models
     {
         public DbSet<Booking> Bookings{ get; set; }
         public DbSet<Lesson> Lessons{ get; set; }
-        public DbSet<Payment> Payments{ get; set; }
         public DbSet<Car> Cars{ get; set; }
 
         public ACE_Driving_School_Db_Context() : base ("ACE_Driving_School_DB", throwIfV1Schema: false)

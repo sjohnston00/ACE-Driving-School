@@ -16,7 +16,6 @@ namespace ACE_Driving_School.Models
         public string DrivingLicenseNo { get; set; }
         public bool hasPassed { get; set; }
         public DateTime? PassedDate { get; set; }
-        public List<Payment> Payments { get; set; }
         public string Most_Recent_Instructor_Id{ get; set; }
 
 

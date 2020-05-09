@@ -21,9 +21,6 @@ namespace ACE_Driving_School.Models
         [ForeignKey("Student")]
         public string Student_Id { get; set; }
         public Student Student { get; set; }
-        [ForeignKey("Payment")]
-        public string Payment_Id { get; set; }
-        public Payment Payment { get; set; }
 
 
     }
