@@ -2,6 +2,7 @@
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -16,12 +17,8 @@ namespace ACE_Driving_School.Controllers
         {
             if (!User.Identity.IsAuthenticated)
                 return RedirectToAction("Login", "Account");
-            
-
             return View();
         }
-
-        
         public ActionResult InstructorAccount()
         {
             string InstructorId = User.Identity.GetUserId();
@@ -42,7 +39,6 @@ namespace ACE_Driving_School.Controllers
         [HttpPost]
         public ActionResult EditDetails(Instructor model)
         {
-
             if (!ModelState.IsValid)
                 return View(model);
 
@@ -58,6 +54,7 @@ namespace ACE_Driving_School.Controllers
             CurrentDbInstructor.Email = model.Email;
 
             context.SaveChanges();
+
             return RedirectToAction("InstructorAccount");
         }
 
@@ -70,10 +67,60 @@ namespace ACE_Driving_School.Controllers
 
             return View();
         }
-
-        public ActionResult ViewUpcomingLesson()
+        public ActionResult MarkLessonAsComplete(int Lesson_Id)
         {
+            if (!User.Identity.IsAuthenticated)
+                return RedirectToAction("Login", "Account");
 
+            Lesson lesson = context.Lessons.Find(Lesson_Id);
+            lesson.Status = "Complete";
+
+            context.SaveChanges();
+            return RedirectToAction("LessonDetails", "Lesson", new { Lesson_Id = Lesson_Id});
+        }
+        public ActionResult TodaysLessons()
+        {
+            if (!User.Identity.IsAuthenticated)
+                return RedirectToAction("Login", "Account");
+
+            string Instructor_Id = User.Identity.GetUserId();
+            Instructor instructor = (Instructor)context.Users.Find(Instructor_Id);
+
+            
+            
+            List<Lesson> Instructors_Lessons = context.Lessons.Where(p => p.Instructor_Id == instructor.Id)
+                                                         .Include(p => p.Student)
+                                                         .Include(p => p.Booking)
+                                                         .Include(p => p.Car)
+                                                         .ToList();
+
+            List<Lesson> Todays_Lessons = new List<Lesson>();
+            foreach (var item in Instructors_Lessons.ToList())
+            {
+                DateTime LessonDate = item.Date_And_Time.Date;
+                if (LessonDate == DateTime.Now.Date)
+                {
+                    Todays_Lessons.Add(item);
+                }
+            }
+            //get rid of this list
+            Instructors_Lessons.Clear();
+
+            return View(Todays_Lessons);
+        }
+
+        public ActionResult ViewAllLessons()
+        {
+            return View();
+        }
+        public ActionResult ViewAllBookings()
+        {
+            return View();
+        }
+
+        public ActionResult MarkStudentsAsPassed()
+        {
+             //Get all the students with the same recent isntructor ID as this instructor and display them
             return View();
         }
 
@@ -84,7 +131,8 @@ namespace ACE_Driving_School.Controllers
 
         public void GetCurrentTraffic()
         {
-
+            //get the bishopbrigs current map
+            //and display it on the view lesson details page
         }
         
     }

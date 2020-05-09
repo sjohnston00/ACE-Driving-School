@@ -146,7 +146,7 @@ namespace ACE_Driving_School.Models
                         Lesson_Id = 1,
                         Booking = booking1,
                         Booking_Id = booking1.Booking_Id,
-                        Date_And_Time = DateTime.Now,
+                        Date_And_Time = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 11, 0, 0),
                         Duration = 1,
                         Instructor = instructor1,
                         Instructor_Note = "Take student round M6",

@@ -19,6 +19,7 @@ namespace ACE_Driving_School.Models
         public bool hasPassed { get; set; }
         [Display(Name = "Driving Test Date")]
         public DateTime? DrivingTestDate { get; set; }
+        public DateTime? PassedDate { get; set; }
         public string Most_Recent_Instructor_Id{ get; set; }
     }
 }

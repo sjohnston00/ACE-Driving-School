@@ -1,0 +1,76 @@
+﻿@model IEnumerable<ACE_Driving_School.Models.Lesson>
+
+@{
+    ViewBag.Title = "Todays Lessons";
+}
+
+<h2>Todays Lessons</h2>
+
+
+@if (!Model.Any() || Model == null)
+{
+    <p>No lessons today you have the day off</p>
+}
+else
+{
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Date_And_Time)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Duration)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Instructor_Note)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Booking_Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Student)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Car)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+        </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(Html.DisplayFor(p => item.Date_And_Time).ToString(),"LessonDetails", "Lesson", new { Lesson_Id = item.Lesson_Id }, null)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Duration)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Instructor_Note)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Booking_Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Student.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Car.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                
+                @if (item.Status == "Incomplete")
+                {
+                     <span>|</span>@Html.ActionLink("Mark As Complete", "MarkLessonAsComplete", new { id = item.Lesson_Id })
+                }
+            </td>
+        </tr>
+    }
+
+    </table>
+}
