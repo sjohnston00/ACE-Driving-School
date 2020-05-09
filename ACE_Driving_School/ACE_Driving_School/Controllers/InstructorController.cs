@@ -120,10 +120,13 @@ namespace ACE_Driving_School.Controllers
                                                               .ToList();
             return View(Instructors_Students);
         }
+
+
         public ActionResult MarkStudentAsPassed(string Student_Id)
         {
             Student student = (Student)context.Users.Find(Student_Id);
             student.hasPassed = true;
+            student.PassedDate = DateTime.Now.Date;
             context.SaveChanges();
             return RedirectToAction("MarkStudentsAsPassed");
         }

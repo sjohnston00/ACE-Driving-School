@@ -85,7 +85,7 @@ namespace ACE_Driving_School.Controllers
         {
             //get the most recent students from the database that have passed
             List<Student> Most_Recent_Passed_Students = context.Users.OfType<Student>()
-                                                        .Where(p => p.hasPassed == false) //change to true after
+                                                        .Where(p => p.hasPassed) //change to true after
                                                         .OrderBy(p => p.PassedDate).ToList();
             return (Most_Recent_Passed_Students);
         }

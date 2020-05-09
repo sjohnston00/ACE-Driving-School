@@ -4,9 +4,11 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 
 namespace ACE_Driving_School.Controllers
@@ -15,6 +17,7 @@ namespace ACE_Driving_School.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private ACE_Driving_School_Db_Context context = new ACE_Driving_School_Db_Context();
 
         public AdminController()
         {
@@ -64,8 +67,8 @@ namespace ACE_Driving_School.Controllers
 
         public ActionResult ViewAllUsers()
         {
-
-            return View();
+            List<User> users = context.Users.ToList();
+            return View(users);
         }
 
         [HttpGet]
@@ -102,7 +105,7 @@ namespace ACE_Driving_School.Controllers
             Instructor instructor = (Instructor) await UserManager.FindByEmailAsync(model.Email);
             var AddingToRole = await UserManager.AddToRoleAsync(instructor.Id, "Instructor");
 
-            //if both everything is successful return the admin to the control panel
+            //if both have succeeded everything is successful return the admin to the control panel
             if (result.Succeeded && AddingToRole.Succeeded)
                 return RedirectToAction("ControlPanel");
 
@@ -110,6 +113,49 @@ namespace ACE_Driving_School.Controllers
 
             //if we got here something went wrong
             return View(model);
+        }
+
+        public ActionResult CheckStudentTestDate()
+        {
+            List<Student> students_with_upcoming_tests = context.Users.OfType<Student>()
+                                                                        .Where(p => p.hasPassed == false)
+                                                                        .Where(p => p.TestDate.HasValue)
+                                                                        .Where(p => p.TestDate < DateTime.Now)
+                                                                        .ToList();
+            foreach (var item in students_with_upcoming_tests)
+            {
+                double daysbetween = (item.TestDate.Value.Date - DateTime.Now.Date).TotalDays;
+                if (daysbetween < 5)
+                {
+                    string URL = Url.Action("ViewAllLessons", "Lesson");
+                    var message = new IdentityMessage
+                    {
+                        Destination = item.Email,
+                        Body = $"Hey {item.FullName} we've noticed that you have a test coming up within 5 days make sure to get some lesson booked before then by clicking here:{URL}",
+                        Subject = $"Upcoming Test on {item.TestDate.Value.Date}"
+                    };
+
+                    SendEmail(message);
+
+                }
+            }
+
+            return RedirectToAction("ViewAllUsers");
+        }
+
+        public void SendEmail(IdentityMessage message)
+        {
+            string To = message.Destination;
+            string body = message.Body;
+            string subject = message.Subject;
+            WebMail.SmtpServer = "smtp.gmail.com";
+            WebMail.SmtpPort = 587;
+            WebMail.SmtpUseDefaultCredentials = true;
+            WebMail.EnableSsl = true;
+            WebMail.UserName = ConfigurationManager.AppSettings["Email"].ToString();
+            WebMail.Password = ConfigurationManager.AppSettings["Email_Password"].ToString();
+
+            WebMail.Send(To, subject, body);
         }
 
         public ActionResult ChangeLessonPrice()

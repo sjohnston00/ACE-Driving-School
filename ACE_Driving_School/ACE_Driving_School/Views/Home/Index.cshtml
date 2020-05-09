@@ -11,12 +11,14 @@
 <table class="table table-bordered table-hover">
     <tr>
         <th>Students</th>
+        <th>Passed Date</th>
     </tr>
 
     @foreach (var item in Model)
     {
         <tr>
             <td>@item.FullName</td>
+            <td>@item.PassedDate.Value.ToString("dd/MM/yyyy")</td>
         </tr>
     }
 </table>

@@ -13,6 +13,8 @@ using System.Configuration;
 using System.EnterpriseServices;
 using ACE_Driving_School.View_Models;
 using System.Web.DynamicData;
+using System.Collections.Generic;
+using System;
 
 namespace ACE_Driving_School.Controllers
 {
@@ -102,6 +104,8 @@ namespace ACE_Driving_School.Controllers
 
             return RedirectToAction("Index", "Manage");
         }
+
+        
 
         public void SendEmail(IdentityMessage message)
         {
