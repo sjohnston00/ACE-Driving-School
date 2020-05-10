@@ -2,33 +2,59 @@
 @{
     ViewBag.Title = "Home Page";
 }
-
-<div class="jumbotron">
-    <h1>ACE Driving School</h1>
+<!--Main body header-->
+<div class="home-header">
+    <div class="container">
+        <div class="container text-right">
+            <h1 class="home-header-slogan-heading text-right">Helping young drivers excel</h1>
+            <div class="home-header-text">
+                <p class="home-header-slogan">
+                    We opperate within the Bishopbriggs area
+                    having taught more damn a thousand students in the past year alone.
+                    <a href="@Url.Action("ChooseLessonAmount", "Booking")" class="btn btn-black">Make A Booking</a>
+                </p>
+            </div>
+        </div>
+    </div>
 </div>
 
-<h1>Most Reccent Passed Students</h1>
-<table class="table table-bordered table-hover">
-    <tr>
-        <th>Students</th>
-        <th>Passed Date</th>
-    </tr>
+<div class="flex-box">
+    <div class="box box-left">
+        <h2>How we operate</h2>
+            <p class="home-left-box-text">
+                We have a lot of instructor for around the country who have had many years
+                of teaching experience. <br />
+                Our goal to help students who find driving a car a big struggle
+                by teaching them that it isn't hard at all. No matter how long it takes our students to learn
+                we will always be there for them
+                Make sure to learn more <a href="@Url.Action("AboutUs","Home")" class="home-left-box-text-link">About Us</a>
+            </p>
+    </div>
+    <div class="box">
+        <h2>Reccently Passed Students</h2>
+        <table class="table table-red">
+            <tr>
+                <th>Students</th>
+                <th>Passed Date</th>
+            </tr>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>@item.FullName</td>
-            <td>@item.PassedDate.Value.ToString("dd/MM/yyyy")</td>
-        </tr>
-    }
-</table>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.FullName</td>
+                    <td>@item.PassedDate.Value.ToString("dd/MM/yyyy")</td>
+                </tr>
+            }
+        </table>
 
 
-@Html.ActionLink("Our Instrutors","ViewAllInstructors","Home")
-<br />
-<br />
-@Html.ActionLink("Make A Booking","ChooseLessonAmount","Booking")
-@if (User.IsInRole("Student"))
-{
-    Html.ActionLink("View All Lessons", "ViewAllLessons", "Lesson");
-}
+        @Html.ActionLink("Our Instrutors", "ViewAllInstructors", "Home")
+        <br />
+        <br />
+        @Html.ActionLink("Make A Booking", "ChooseLessonAmount", "Booking")
+        @if (User.IsInRole("Student"))
+        {
+            Html.ActionLink("View All Lessons", "ViewAllLessons", "Lesson");
+        }
+    </div>
+</div>

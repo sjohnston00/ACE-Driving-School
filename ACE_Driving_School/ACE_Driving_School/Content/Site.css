@@ -1,13 +1,16 @@
-﻿body {
+﻿@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&display=swap');
+
+body {
     padding-top: 50px;
     padding-bottom: 20px;
+    font-family: 'Poppins', sans-serif;
 }
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
-}
+} 
 
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
@@ -21,4 +24,81 @@ input,
 select,
 textarea {
     max-width: 280px;
+}
+.logo{
+    height: 80px;
+    width: 100px;
+}
+.right-nav{
+    height: 10px;
+}
+
+.home-header {
+    display: flex;
+    align-items: center;
+    background-color: #EE1C25;
+    height: 300px;
+    color: white;
+    box-shadow: 0px 5px 13px #808080;
+
+}
+.home-header-slogan-heading {
+    font-size: 45px;
+    padding-bottom: 20px;
+}
+.home-header-text {
+    width: 35%;
+    float: right;
+}
+
+.btn-black {
+    border: 1px solid #EE1C25;
+    background-color: black;
+    color: white;
+    padding: 3px 6px;
+}
+btn-black a:hover{
+    text-decoration: underline;
+}
+
+.flex-box{
+    display: flex;
+    flex-wrap: nowrap;
+}
+.flex-box .box {
+    width: 50%;
+    margin: 50px; 
+}
+.home-left-box-text {
+    margin: 0 auto;
+    width: 80%;
+}
+.home-left-box-text-link {
+    color: #EE1C25;
+}
+
+.flex-box .box-left {
+    text-align: center;
+}
+table-red table, tr, th, td {
+    border: 1px solid red;
+}
+
+
+.layout-footer {
+    display: flex;
+}
+
+.layout-footer p{
+    padding-left: 20px;
+}
+
+.social-pages {
+    width: 80%;
+    display:flex;
+    justify-content: flex-end;   
+}
+.social-image{
+    height: 25px;
+    width: 25px;
 }
