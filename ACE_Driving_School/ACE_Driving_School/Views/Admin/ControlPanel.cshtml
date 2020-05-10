@@ -12,4 +12,6 @@
 @Html.ActionLink("Change Lesson Prices", "ChangeLessonPrice", null, new { @class = "btn btn-primary" })
 <hr />
 @Html.ActionLink("Generate Reports", "GenerateReports", null, new { @class = "btn btn-primary" })
+<hr />
+@Html.ActionLink("Warn Students of Upcoming Tests", "CheckStudentTestDate", null, new { @class = "btn btn-primary", onclick = "return confirm('This will send an email to every student who has an upcoming driving test within the next 5 days')" })
 

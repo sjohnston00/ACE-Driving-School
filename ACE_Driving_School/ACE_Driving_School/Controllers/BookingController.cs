@@ -137,8 +137,11 @@ namespace ACE_Driving_School.Controllers
             return RedirectToAction("ViewAllBookings");
         }
 
-        public ActionResult ViewBooking(int Booking_Id)
+        public ActionResult ViewBooking(int? Booking_Id)
         {
+            if (!Booking_Id.HasValue)
+                return View("ViewAllBookings");
+
             if (!User.Identity.IsAuthenticated)
                 return RedirectToAction("Login", "Account");
 
@@ -188,7 +191,9 @@ namespace ACE_Driving_School.Controllers
 
         public ActionResult UpdateBookingsLesson(int Booking_Id)
         {
-            Booking booking = context.Bookings.Find(Booking_Id);
+            Booking booking = context.Bookings.Where(p => p.Booking_Id == Booking_Id)
+                                              .Include(p => p.Student)
+                                              .FirstOrDefault();
 
             if (booking.Lesson_Amount == 1)
             {
@@ -202,12 +207,14 @@ namespace ACE_Driving_School.Controllers
             }
 
             //bookings lesson amount has been lowered 
+            //send a confirmation email to student
+            SendUpdateBookingConfirmationEmail(booking.Student, booking);
             return null;
         }
 
         public void SendCreateBookingConfirmationEmail(Student student, Booking booking)
         {
-            string ViewAllBooking_URL = Url.Action("ViewBooking", "Booking", new { Booking_Id = booking.Booking_Id});
+            string ViewAllBooking_URL = Url.Action("ViewAllBookings", "Booking");
             var Email = new IdentityMessage
             {
                 Destination = student.Email,
@@ -223,13 +230,16 @@ namespace ACE_Driving_School.Controllers
 
         public void SendUpdateBookingConfirmationEmail(Student student, Booking booking)
         {
-            string ViewAllBooking_URL = Url.Action("ViewBooking", "Booking", new { Booking_Id = booking.Booking_Id });
+            string ViewBooking_URL = Url.Action("ViewBooking", "Booking", new { Booking_Id = booking.Booking_Id });
+            string ACE_Driving_School_Email_Address = "acedrivingschoolofficial@gmail.com";
             var Email = new IdentityMessage
             {
                 Destination = student.Email,
                 Subject = $"ACE Driving School Update Booking Confirmation {booking.Booking_Id}",
-                Body = $"Just to let you know {student.FullName}, you have recently updated a booking that know only contains {booking.Lessons.Count} lessons \n" +
-                       $"Updated on: {booking.Date_and_Time}"
+                Body = $"Just to let you know {student.FullName}, you have recently updated a booking that now only contains {booking.Lessons.Count} lessons \n" +
+                       $"Updated on: {booking.Date_and_Time} \n" +
+                       $"Check your bookings here: {ViewBooking_URL}" +
+                       $"If this wasnt you then make sure to send us an email straight away to inform us {ACE_Driving_School_Email_Address}"
             };
 
             SendEmail(Email);

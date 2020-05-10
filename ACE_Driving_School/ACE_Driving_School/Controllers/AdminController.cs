@@ -140,7 +140,7 @@ namespace ACE_Driving_School.Controllers
                 }
             }
 
-            return RedirectToAction("ViewAllUsers");
+            return RedirectToAction("ControlPanel");
         }
 
         public void SendEmail(IdentityMessage message)
