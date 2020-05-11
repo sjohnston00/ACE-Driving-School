@@ -270,7 +270,6 @@ namespace ACE_Driving_School.Controllers
 
                 if (result.Succeeded && AddingToRole.Succeeded)
                 {
-                    
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
 
                     string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);

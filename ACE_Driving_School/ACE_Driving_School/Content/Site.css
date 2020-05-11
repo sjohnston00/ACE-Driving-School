@@ -81,7 +81,17 @@ btn-black a:hover{
     text-align: center;
 }
 table-red table, tr, th, td {
-    border: 1px solid red;
+    border: 2px solid black;
+    padding: 5px;
+}
+.table-red th {
+    background-color: #EE1C25;
+    color: white;
+}
+.table-red {
+    width: 100%;
+    padding: 50px;
+    margin-bottom: 30px;
 }
 
 
