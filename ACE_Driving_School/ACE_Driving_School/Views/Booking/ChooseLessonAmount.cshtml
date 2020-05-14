@@ -13,11 +13,11 @@
         <hr />
         <div class="form-group">
             <div class="col-md-10">
-                @Html.DropDownListFor(p => p.chossen_Amount, new SelectList(Model.Lesson_Amount), new { @class= "form-control", @onchange="GetPrice()"})
+                @Html.DropDownListFor(p => p.chossen_Amount, new SelectList(Model.Lesson_Amount), new { @class = "form-control", @onchange = "GetPrice()" })
             </div>
             <p>Price: <span id="price">£20</span></p>
         </div>
-        
+
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <button type="submit" class="btn btn-primary">Confirm</button>
