@@ -11,6 +11,11 @@ body {
     padding-left: 15px;
     padding-right: 15px;
 } 
+a:hover {
+    border: 1px solid black;
+    background-color: #EE1C25;
+    color: white;
+}
 
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
@@ -150,6 +155,8 @@ table-red table, tr, th, td {
 .Register-As-New-User-Link{
     margin-top: 20px;
 }
+.register-form {
 
+}
 
 
