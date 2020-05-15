@@ -1,4 +1,5 @@
 ﻿using ACE_Driving_School.Models;
+using Microsoft.Ajax.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -17,8 +18,9 @@ namespace ACE_Driving_School.Controllers
         /// Main Home page, display the 6 most recent passed students
         /// </summary>
         /// <returns>List of Students to the view</returns>
-        public ActionResult Index()
+        public ActionResult Index(string Error_Message)
         {
+            
             List<Student> Most_Recent_Passed_Students = Get_Most_Recent_Passed_Students();
             return View(Most_Recent_Passed_Students);
         }

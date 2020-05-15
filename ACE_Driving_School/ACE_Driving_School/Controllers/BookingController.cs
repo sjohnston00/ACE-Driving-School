@@ -1,5 +1,6 @@
 ﻿using ACE_Driving_School.Models;
 using ACE_Driving_School.View_Models;
+using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
@@ -28,8 +29,9 @@ namespace ACE_Driving_School.Controllers
                     return HttpNotFound("No student found");
 
                 List <Booking> Students_Bookings = context.Bookings.Where(p => p.Student_Id == student.Id)
-                                                      .Include(p => p.Student)
-                                                      .ToList();
+                                                                    .Where(p => p.Payment_Status == "Complete")
+                                                                    .Include(p => p.Student)
+                                                                    .ToList();
                 //Add the lessons to the bookings
                 foreach (var item in Students_Bookings)
                 {
@@ -56,8 +58,12 @@ namespace ACE_Driving_School.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult ChooseLessonAmount()
+        public ActionResult ChooseLessonAmount(string Error_Message)
         {
+            if (!Error_Message.IsNullOrWhiteSpace())
+            {
+                ViewBag.ErrorMessage = $"{Error_Message}";
+            }
             LessonAmounts_ViewModel LessonAmounts = new LessonAmounts_ViewModel();
             return View(LessonAmounts);
         }

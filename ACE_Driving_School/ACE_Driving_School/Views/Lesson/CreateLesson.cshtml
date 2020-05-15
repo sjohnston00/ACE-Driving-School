@@ -5,7 +5,7 @@
 }
 <div class="Create-Lesson-Heading">
     <h2>Create A Lesson </h2>
-    <h4>Choosen amount of Lessons @Model.Choosen_Amount</h4>
+    <h4>Amount of Lessons @Model.Choosen_Amount</h4>
 </div>
 
         
@@ -14,17 +14,20 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.Dates, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.Chossen_Date, new SelectList(Model.Dates), new { @class = "form-control", data_val = false })
+                @Html.DropDownListFor(model => model.Chossen_Date, new SelectList(Model.Dates), "Select A Date", new { @class = "form-control"})
+                @Html.ValidationMessageFor(model => model.Chossen_Date, "", new { @class = "text-danger" })
+
             </div>
         </div>
         <div class="form-group">
             @Html.LabelFor(model => model.Times, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.Chossen_Time, new SelectList(Model.Times), new { @class = "form-control", data_val = false })
+                @Html.DropDownListFor(model => model.Chossen_Time, new SelectList(Model.Times), "Select A Time", new { @class = "form-control"})
+                @Html.ValidationMessageFor(model => model.Chossen_Time, "", new { @class = "text-danger" })
+
             </div>
         </div>
 
@@ -32,14 +35,14 @@
             @Html.LabelFor(model => model.Duration, htmlAttributes: new { @class = "control-label col-md-2" }) 
             <div class="col-md-10">
                 @Html.DropDownListFor(model => model.Choosen_Hours, new SelectList(Model.Duration), "Select Duration", new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Duration, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.Choosen_Hours, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">
             @Html.LabelFor(model => model.Instructors, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.Chossen_Instructor.Id, new SelectList(Model.Instructors, "Id", "Fullname"), "Select And Instructor", new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Chossen_Instructor.Id, "", new { @class = "text-danger" })
+                @Html.DropDownListFor(model => model.Chossen_Instructor.Id, new SelectList(Model.Instructors, "Id", "Fullname"), new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Chossen_Instructor, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -47,6 +50,7 @@
             @Html.LabelFor(model => model.Car_Type, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownListFor(model => model.Car_Type_Chossen, new SelectList(Model.Car_Type), "Select Car Type", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Car_Type_Chossen, "", new { @class = "text-danger" })
             </div>
         </div>
         @Html.HiddenFor(m => m.Choosen_Amount)

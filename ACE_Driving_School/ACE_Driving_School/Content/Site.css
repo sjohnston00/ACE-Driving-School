@@ -244,7 +244,61 @@ table-red table, tr, th, td {
     width: 40%;
     margin: 50px auto 20px auto;
 }
-.Create-Lesson-Form {
-    width: 40%;
+.Create-Lesson-Heading h2 {
+    font-size: 50px;
+    font-weight: 700;
 }
-
+.Create-Lesson-Heading h4 {
+    font-size: 30px;
+}
+.Create-Lesson-Form {
+    width: 30%;
+}
+.form-horizontal select {
+    border: 1.5px solid #EE1C25;
+    font-weight: 600;
+}
+.form-horizontal select:focus {
+    outline: none;
+    border: 1.5px solid #EE1C25;
+    box-shadow: 0 0 10px #EE1C25;
+    
+}
+.form-horizontal label {
+    font-size: 16px;
+    padding: 0;
+    padding-right: 20px;
+}
+.payment-container {
+    margin-top: 40px;
+}
+.payment-container h2 {
+    font-size: 40px;
+    font-weight: 700;
+}
+.payment-wrapper label{
+    font-size: 16px;
+    font-weight: 600;
+    padding-bottom: 5px;
+    
+}
+.payment-wrapper span {
+    padding-left: 5px;
+    font-size: 15px;
+}
+.dl-horizontal-payment dt{
+    text-align: left;
+    width: auto;
+}
+.dl-horizontal-payment dd {
+    width: 10%;
+}
+#edit-Lesson-Link {
+    color: black;
+}
+#edit-Lesson-Link:hover {
+    background-color: transparent;
+    border: none;
+    color: #EE1C25;
+    text-decoration: underline;
+}

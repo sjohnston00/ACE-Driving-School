@@ -38,6 +38,11 @@ namespace ACE_Driving_School.Controllers
                                                                  .Include(p => p.Booking)
                                                                  .ToList();
 
+            if (booking.Lessons.Count > booking.Lesson_Amount)
+            {
+                return RedirectToAction("ChooseLessonAmount", "Booking", new { Error_Message = "Error occured start again"});
+            }
+
             ViewBag.Client_ID = ConfigurationManager.AppSettings["Paypal_ClientID"].ToString();
             return View(booking);
         }

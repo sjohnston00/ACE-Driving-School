@@ -14,9 +14,14 @@ namespace ACE_Driving_School.View_Models
         public int Choosen_Amount { get; set; }
 
         public List<string> Dates { get; set; }
+
+        [Required]
+        [Display(Name = "Date")]
         public string Chossen_Date { get; set; }
         
         public List<string> Times { get; set; }
+        [Required]
+        [Display(Name = "Time")]
         public string Chossen_Time { get; set; }
 
         [Display(Name ="Duraction (Hours)")]
@@ -28,11 +33,15 @@ namespace ACE_Driving_School.View_Models
                 return duration;
             }
         }
+        [Required]
+        [Display (Name = "Duration")]
         public int Choosen_Hours { get; set; }
 
+        public List<Instructor> Instructors { get; set; }
+
+        [Required]
         [Display(Name ="Instructor")]
         public Instructor Chossen_Instructor { get; set; }
-        public List<Instructor> Instructors { get; set; }
 
         [Display(Name ="Car Type")]
         public List<string> Car_Type 
@@ -41,8 +50,11 @@ namespace ACE_Driving_School.View_Models
                 return carType;
             }
         }
+        [Required]
+        [Display(Name = "Car Type")]
         public string Car_Type_Chossen { get; set; }
 
         public int LessonInBooking { get; set; }
+        public string Return_Url { get; set; }
     }
 }

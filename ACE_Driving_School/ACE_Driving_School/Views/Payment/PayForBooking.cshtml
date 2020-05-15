@@ -4,64 +4,42 @@
     ViewBag.Title = "Pay For Booking";
 }
 
-<h2>Pay For Booking</h2>
+@{ var Return_Url = HttpContext.Current.Request.Url.AbsoluteUri;}
+<div class="container payment-container">
+    <h2>Pay For Booking</h2>
 
-<div>
-    <h4>Booking</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Lesson_Amount)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Lesson_Amount)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Date_and_Time)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Date_and_Time)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Price)
-        </dd>
-    </dl>
-    <table class="table table-hover" >
-        <tr>
-            <th>@Html.DisplayNameFor(p => p.Lessons.First().Date_And_Time)</th>
-            <th>@Html.DisplayNameFor(p => p.Lessons.First().Instructor.FullName)</th>
-            <th>@Html.DisplayNameFor(p => p.Lessons.First().Car.Name)</th>
-        </tr>
-        @foreach (var item in Model.Lessons)
-        {
+    <div class="payment-wrapper">
+            @Html.LabelFor(model => model.Lesson_Amount):
+            <span>@Html.DisplayFor(model => model.Lesson_Amount)</span>
+            <br />
+            @Html.LabelFor(model => model.Date_and_Time):
+            <span>@Html.DisplayFor(model => model.Date_and_Time)</span>
+            <br />
+            @Html.LabelFor(model => model.Price):
+            <span>£@Html.DisplayFor(model => model.Price)</span>
+        <table class="table table-red" >
             <tr>
-                <td>@Html.DisplayFor(p => item.Date_And_Time)</td>
-                <td>@Html.DisplayFor(p => item.Instructor.FullName)</td>
-                <td>@Html.DisplayFor(p => item.Car.Name)</td>
+                <th>@Html.DisplayNameFor(p => p.Lessons.First().Date_And_Time)</th>
+                <th>Instructor</th>
+                <th>Car</th>
             </tr>
-        }
-    </table>
+            @foreach (var item in Model.Lessons)
+            {
+                <tr>
+                    
+                    <td>@Html.ActionLink(Html.DisplayFor(p => item.Date_And_Time).ToString(), "EditLesson", "Lesson", new { Lesson_Id = item.Lesson_Id, Return_Url = Return_Url}, new { @id = "edit-Lesson-Link", title = "Edit Lesson"})</td>
+                    <td>@Html.DisplayFor(p => item.Instructor.FullName)</td>
+                    <td>@Html.DisplayFor(p => item.Car.Name)</td>
+                </tr>
+            }
+        </table>
+    </div>
+
+    <script src="https://www.paypal.com/sdk/js?client-id=@ViewBag.Client_ID&currency=GBP"></script>
+
+    <div id="paypal-button-container" class="text-center"></div>
+
 </div>
-<p>
-    @Html.ActionLink("Edit", "UpdateBooking", "Booking", new { Booking_Id = Model.Booking_Id }, null) |
-    @Html.ActionLink("Home", "Index", "Home")
-</p>
-
-@{ var Client_ID = ViewBag.Client_ID;}
-<script src="https://www.paypal.com/sdk/js?client-id=@Client_ID&currency=GBP">
-    // Required. Replace SB_CLIENT_ID with your sandbox client ID.
-</script>
-
-<div id="paypal-button-container"></div>
-
 <script>
     paypal.Buttons({
     createOrder: function(data, actions) {
@@ -77,7 +55,7 @@
         onApprove: function (data, actions) {
         // This function captures the funds from the transaction.
         return actions.order.capture().then(function (details) {
-            // This function shows a transaction success message to your buyer.
+            // This function sends the user to the booking confirmation page once it has been paid for
             window.location.href = '@Url.Action("BookingConfirmation","Booking", new { Booking_Id = Model.Booking_Id})'
         });
     }

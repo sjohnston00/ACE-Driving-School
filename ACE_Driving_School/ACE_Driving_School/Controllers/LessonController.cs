@@ -1,5 +1,6 @@
 ﻿using ACE_Driving_School.Models;
 using ACE_Driving_School.View_Models;
+using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
@@ -195,7 +196,7 @@ namespace ACE_Driving_School.Controllers
         }
 
         [HttpGet]
-        public ActionResult EditLesson(int? Lesson_Id)
+        public ActionResult EditLesson(int? Lesson_Id, string Return_Url)
         {
             if (!Lesson_Id.HasValue)
                 return HttpNotFound("No lesson found");
@@ -226,6 +227,10 @@ namespace ACE_Driving_School.Controllers
             viewModel.Times = times;
 
             viewModel.Instructors = GetInstructors();
+
+            if (!Return_Url.IsNullOrWhiteSpace())
+                viewModel.Return_Url = Return_Url;
+
             return View(viewModel);
         }
 
@@ -260,6 +265,10 @@ namespace ACE_Driving_School.Controllers
             CurrentDbLesson.Instructor_Id = instructor.Id;
 
             context.SaveChanges();
+            if (!UpdatedLesson.Return_Url.IsNullOrWhiteSpace())
+                return Redirect(UpdatedLesson.Return_Url);
+
+
             return RedirectToAction("LessonDetails", new { Lesson_Id = UpdatedLesson.Lesson_Id});
         }
 
