@@ -65,9 +65,11 @@ input:focus {
     background-color: black;
     color: white;
     padding: 3px 6px;
+    font-weight: 700;
 }
-btn-black a:hover{
-    text-decoration: underline;
+.btn-black:hover{
+    background-color: transparent;
+    color: white;
 }
 
 .flex-box{
@@ -132,6 +134,10 @@ table-red table, tr, th, td {
 .login-form {
     text-align: left;
 }
+.login-form-wrapper {
+    width: 50%;
+    margin: 0 auto;
+}
 .Login-Header h2 {
     margin: 50px auto;
     text-align: center;
@@ -145,7 +151,7 @@ table-red table, tr, th, td {
     margin-bottom: 30px;
 }
 .Login-Textbox input {
-    width: 50%;
+    width: 70%;
     padding: 5px 10px;
     border: 1.5px solid #EE1C25;
     border-radius: 3px;
@@ -154,7 +160,7 @@ table-red table, tr, th, td {
     margin: 10px 0;
 }
 .Remember-Me-Input label {
-    font-weight: normal;
+    font-weight: 600;
     padding-right: 20px;
 }
 .Register-As-New-User-Link{
@@ -193,7 +199,46 @@ table-red table, tr, th, td {
     width: 40%;
     margin: 20px auto;
 }
+.flex-box-choosen-lesson-amount {
+    height: 80vh;
+}
+.box-left-lesson-amount-page {
+    border-right: 5px solid #EE1C25;
+}
+.box-left-input {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
 
+.box-left-input select, .box-left-input select :focus{
+    text-align: center;
+    padding: 5px 10px;
+    font-size: 22px;
+    outline: none;
+}
+.box-left-lesson-amount-page h4 {
+    font-size: 40px;
+    font-weight: 700;
+}
+.box-right-lesson-amount-page {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+.box-right-lesson-amount-page p, #price {
+    margin: auto 0;
+    font-size: 60px;
+    font-weight: 700;
+}
+.choosen-lesson-dropdown {
+    width: 40%;
+    border: 1.5px solid #EE1C25;
+    border-radius: 5px;
+}
+.btn-choose-Lesson {
+    margin-top: 20px;
+}
 
 
 

@@ -23,24 +23,30 @@
             <div class="navbar-collapse collapse">
                 <a href="@Url.Action("Index", "Home")"><img class="logo" src="~/Content/Images/Logo.png" /></a>
                     
-                    <ul class="nav navbar-nav navbar-right ">
-                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                        @if (User.IsInRole("Instructor"))
-                        {
-                            <li>@Html.ActionLink("Instructor Home", "InstructorHome", "Instructor")</li>
-                        }
-                        @if (User.IsInRole("Student"))
-                        {
-                            <li>@Html.ActionLink("My Bookings", "ViewAllBookings", "Booking")</li>
-                        }
-                        @if (User.IsInRole("Admin"))
-                        {
-                            <li>@Html.ActionLink("Admin Home", "ControlPanel", "Admin")</li>
-                        }
-                        <li>@Html.ActionLink("About", "About", "Home")</li>
-                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                        @Html.Partial("_LoginPartial")
-                    </ul>
+                <ul class="nav navbar-nav navbar-right ">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    @if (User.IsInRole("Instructor"))
+                    {
+                        <li>@Html.ActionLink("Instructor Home", "InstructorHome", "Instructor")</li>
+                    }
+                    @if (User.IsInRole("Student"))
+                    {
+                        <li>@Html.ActionLink("My Bookings", "ViewAllBookings", "Booking")</li>
+                        <li>@Html.ActionLink("Make A Booking", "ChooseLessonAmount", "Booking")</li>
+                    }
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li>@Html.ActionLink("Admin Home", "ControlPanel", "Admin")</li>
+                    }
+                    @if (!User.Identity.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink("Make A Booking", "ChooseLessonAmount", "Booking")</li>
+                    }
+
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Our Instructors", "ViewAllInstructors", "Home")</li>
+                    @Html.Partial("_LoginPartial")
+                </ul>
             </div>
         </div>
     </div>

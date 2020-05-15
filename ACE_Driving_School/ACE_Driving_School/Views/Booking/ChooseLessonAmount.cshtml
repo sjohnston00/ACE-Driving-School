@@ -5,24 +5,23 @@
 
 
 
-@using (Html.BeginForm("ChooseLessonAmount", "Booking"))
+@using (Html.BeginForm("ChooseLessonAmount", "Booking", FormMethod.Post, new { @class = "Choosen-Lesson-Form"}))
 {
     @Html.AntiForgeryToken()
-    <div class="form-horizontal">
-        <h4>Choose Lesson Amount</h4>
-        <hr />
-        <div class="form-group">
-            <div class="col-md-10">
-                @Html.DropDownListFor(p => p.chossen_Amount, new SelectList(Model.Lesson_Amount), new { @class = "form-control", @onchange = "GetPrice()" })
+    <div class="flex-box flex-box-choosen-lesson-amount">
+        <div class="box box-left box-left-lesson-amount-page">
+            <div class="box-left-input"> 
+                <h4>Choose Lesson Amount</h4>
+                @Html.DropDownListFor(p => p.chossen_Amount, new SelectList(Model.Lesson_Amount), new { @class = "choosen-lesson-dropdown", @onchange = "GetPrice()" })
+                <br />
+                <button type="submit" class="btn btn-red btn-choose-Lesson">Confirm</button>
             </div>
+        </div>
+        
+        <div class="box box-right-lesson-amount-page">
             <p>Price: <span id="price">£20</span></p>
         </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <button type="submit" class="btn btn-primary">Confirm</button>
-            </div>
-        </div>
         <script>
             function GetPrice() {
                 var price;
