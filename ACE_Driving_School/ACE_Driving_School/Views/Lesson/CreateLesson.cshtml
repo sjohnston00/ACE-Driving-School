@@ -3,16 +3,17 @@
 @{
     ViewBag.Title = "Create Lesson";
 }
-<h2>Create A Lesson </h2>
-<h4>Choosen amount of Lessons @Model.Choosen_Amount</h4>
+<div class="Create-Lesson-Heading">
+    <h2>Create A Lesson </h2>
+    <h4>Choosen amount of Lessons @Model.Choosen_Amount</h4>
+</div>
 
         
-@using (Html.BeginForm())
+@using (Html.BeginForm("CreateLesson", "Lesson", FormMethod.Post, new { @class = "Create-Lesson-Form container"}))
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.Dates, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -54,7 +55,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Create" class="btn btn-red" />
             </div>
         </div>
     </div>

@@ -239,7 +239,12 @@ table-red table, tr, th, td {
 .btn-choose-Lesson {
     margin-top: 20px;
 }
-
-
-
+.Create-Lesson-Heading {
+    text-align: center;
+    width: 40%;
+    margin: 50px auto 20px auto;
+}
+.Create-Lesson-Form {
+    width: 40%;
+}
 
