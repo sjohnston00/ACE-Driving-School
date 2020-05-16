@@ -27,7 +27,7 @@
                 Our goal to help students who find driving a car a big struggle
                 by teaching them that it isn't hard at all. No matter how long it takes our students to learn
                 we will always be there for them.
-                Make sure to learn more <a href="@Url.Action("AboutUs","Home")" class="home-left-box-text-link">About Us</a>
+                Make sure to learn more <a href="@Url.Action("About","Home")" class="home-left-box-text-link">About Us</a>
             </p>
     </div>
     <div class="box">
@@ -47,14 +47,5 @@
             }
         </table>
 
-
-        @Html.ActionLink("Our Instrutors", "ViewAllInstructors", "Home")
-        <br />
-        <br />
-        @Html.ActionLink("Make A Booking", "ChooseLessonAmount", "Booking")
-        @if (User.IsInRole("Student"))
-        {
-            Html.ActionLink("View All Lessons", "ViewAllLessons", "Lesson");
-        }
     </div>
 </div>

@@ -3,10 +3,10 @@
 @{
     ViewBag.Title = "ViewAllInstructors";
 }
+<div class="container container-wrapper">
+    <h2>Our Instructors</h2>
 
-<h2>Our Instructors</h2>
-
-<table class="table table-bordered table-hover">
+    <table class="table table-red">
     <tr>
         <th>@Html.DisplayNameFor(p => p.FullName)</th>
         <th>@Html.DisplayNameFor(p => p.Email)</th>
@@ -24,6 +24,7 @@
             </tr>
         }
     }
-</table>
-<p>@Html.ActionLink("Home","Index","Home")</p>
+    </table>
+    <p>@Html.ActionLink("Home","Index","Home", new { @class = "btn btn-red"})</p>
+</div>
 

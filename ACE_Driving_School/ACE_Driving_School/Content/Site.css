@@ -357,3 +357,10 @@ table-red table, tr, th, td {
 .edit-lesson-container {
     width: 40%;
 }
+.box-right-google-map {
+    height: 50vh;
+}
+.box-right-google-map iframe {
+    width: 100%;
+    height: 100%;
+}
