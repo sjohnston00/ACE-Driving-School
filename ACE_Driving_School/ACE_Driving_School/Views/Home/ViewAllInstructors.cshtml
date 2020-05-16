@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<ACE_Driving_School.Models.User>
 
 @{
-    ViewBag.Title = "ViewAllInstructors";
+    ViewBag.Title = "View All Instructors";
 }
 <div class="container container-wrapper">
     <h2>Our Instructors</h2>
@@ -25,6 +25,6 @@
         }
     }
     </table>
-    <p>@Html.ActionLink("Home","Index","Home", new { @class = "btn btn-red"})</p>
+    <p>@Html.ActionLink("Home","Index",null, new { @class = "btn btn-red"})</p>
 </div>
 

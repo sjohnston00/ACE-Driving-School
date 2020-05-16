@@ -4,60 +4,63 @@
     ViewBag.Title = "View All Bookings";
 }
 <div class="container container-wrapper">
-    <h2 id="ViewBookingHeading">View All Bookings</h2>
-    @if (Model.Count() == 0)
-    {
-        <p>You have not made any bookings yet</p>
-    }
-    else
-    {
-        <table class="table table-red table-responsive">
-            <tr>
-                @if (User.IsInRole("Instructor") || User.IsInRole("Admin"))
-                {
-                    <th>
-                        Student
-                    </th>
-                }
-                <th>
-                    @Html.DisplayNameFor(model => model.Booking_Id)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Date_and_Time)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Lesson_Amount)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Price)
-                </th>
-            </tr>
+    <div class="View-All-Bookings">
 
-            @foreach (var item in Model)
-            {
+        <h2 id="ViewBookingHeading">View All Bookings</h2>
+        @if (Model.Count() == 0)
+        {
+            <p>You have not made any bookings yet</p>
+        }
+        else
+        {
+            <table class="table table-red table-responsive">
                 <tr>
                     @if (User.IsInRole("Instructor") || User.IsInRole("Admin"))
                     {
-                        <td>
-                            @Html.DisplayFor(model => item.Student.UserName)
-                        </td>
+                        <th>
+                            Student
+                        </th>
                     }
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Booking_Id)
-                    </td>
-                    <td>
-                        @Html.ActionLink(Html.DisplayFor(modelItem => item.Date_and_Time).ToString(), "ViewBooking",  new { Booking_Id = item.Booking_Id })
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Lesson_Amount)
-                    </td>
-                    <td>
-                        £@Html.DisplayFor(modelItem => item.Price)
-                    </td>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Booking_Id)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Date_and_Time)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Lesson_Amount)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Price)
+                    </th>
                 </tr>
-            }
 
-        </table>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        @if (User.IsInRole("Instructor") || User.IsInRole("Admin"))
+                        {
+                            <td>
+                                @Html.DisplayFor(model => item.Student.UserName)
+                            </td>
+                        }
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Booking_Id)
+                        </td>
+                        <td>
+                            @Html.ActionLink(Html.DisplayFor(modelItem => item.Date_and_Time).ToString(), "ViewBooking",  new { Booking_Id = item.Booking_Id })
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Lesson_Amount)
+                        </td>
+                        <td>
+                            £@Html.DisplayFor(modelItem => item.Price)
+                        </td>
+                    </tr>
+                }
 
-    }
+            </table>
+
+        }
+    </div>
 </div>

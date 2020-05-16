@@ -55,7 +55,7 @@ namespace ACE_Driving_School.Controllers
 
         //
         // GET: /Manage/Index
-        public ActionResult Index(ManageMessageId? message)
+        public async Task<ActionResult> Index(ManageMessageId? message)
         {
             //if the users is an instructor then redirect them to their own page
             if (User.IsInRole("Instructor"))
@@ -72,10 +72,11 @@ namespace ACE_Driving_School.Controllers
                 : "";
 
             var userId = User.Identity.GetUserId();
-            Student user = (Student)context.Users.Find(userId);
-            string EmailConfirmed = user.EmailConfirmed == true ? "Yes" : "No";
+            Student student = (Student)context.Users.Find(userId);
+            string EmailConfirmed = student.EmailConfirmed == true ? "Yes" : "No";
             ViewBag.EmailConfirmed = EmailConfirmed;
-            return View(user);
+
+            return View(student);
         }
 
         //

@@ -39,8 +39,12 @@ input:focus {
     outline: none;
 }
 .logo{
-    height: 80px;
+    height: 90px;
     width: 100px;
+}
+.logo:hover, .logo a:hover{
+    border:none;
+    outline: none;
 }
 .right-nav{
     height: 10px;
@@ -363,4 +367,22 @@ table-red table, tr, th, td {
 .box-right-google-map iframe {
     width: 100%;
     height: 100%;
+}
+.instructor-image {
+    height: 200px;
+    width: 200px;
+    border: 1.5px solid #EE1C25;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+}
+.About-Us {
+    height: 50%;
+}
+.Contact-Us {
+    height: 50%;
+}
+.View-All-Bookings {
+    height: 80vh;
 }

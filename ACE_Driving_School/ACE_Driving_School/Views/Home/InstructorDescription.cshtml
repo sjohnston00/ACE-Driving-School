@@ -3,41 +3,36 @@
 @{
     ViewBag.Title = "Instructor Description";
 }
+<div class="container container-wrapper" >
 
-<h2>@Model.FullName</h2>
+    <h2>@Model.FullName</h2>
 
-<p>Image Here</p>
+    <div class="instructor-image">
+        <p>image-here</p>
+    </div>
 
-@if (Model.Current_Students.Count() == 0 || Model.Current_Students == null)
-{
-    //Instructor doesnt have any current students
-    <p>This instructor has no current students</p>
-}
-else //Instructor has student then print them
-{
-    <p>Most Recent Passed Studenst</p>
-    <table class="table table-bordered table-hover">
-        <tr>
-            <th>Students</th>
-        </tr>
-        @foreach (var item in Model.Current_Students)
-        {
+    @if (Model.Current_Students.Count() == 0 || Model.Current_Students == null)
+    {
+        //Instructor doesnt have any current students
+        <p>This instructor has no current students</p>
+    }
+    else //Instructor has student then print them
+    {
+        <p>Most Recent Passed Studenst</p>
+        <table class="table table-red">
             <tr>
-                <td>@item.FullName</td>
+                <th>Students</th>
             </tr>
-        }
+            @foreach (var item in Model.Current_Students)
+            {
+                <tr>
+                    <td>@item.FullName</td>
+                </tr>
+            }
 
-    </table>
-}
+        </table>
+    }
+    <p><b id="Confirmation-Highlight">Bio:</b> @Model.Bio</p>
+    @Html.ActionLink("Back","ViewAllInstructors", null, new { @class = "btn btn-red"})
 
-
-<p>Bio: @Model.Bio</p>
-
-@if (User.IsInRole("Student"))
-{
-    //develop if ahead
-    @Html.ActionLink("Booking A Lesson With This Instructor", "CreateBooking", "Booking")
-}
-
-
-
+</div>
