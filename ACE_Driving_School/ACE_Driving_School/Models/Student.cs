@@ -12,6 +12,7 @@ namespace ACE_Driving_School.Models
         [NotMapped]
         public List<Booking> Bookings { get; set; }
         [Display(Name ="Driving License Number")]
+        [Required]
         [RegularExpression("[A-Z0-9]{5}\\d[0156]\\d([0][1-9]|[12]\\d|3[01])\\d[A-Z0-9]{3}[A-Z]{2}", ErrorMessage = "Please enter a valid driving license number" )]
         public string DrivingLicenseNo { get; set; }
         public DateTime? TestDate { get; set; }

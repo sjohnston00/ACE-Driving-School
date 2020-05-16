@@ -226,7 +226,7 @@ namespace ACE_Driving_School.Controllers
                 Destination = student.Email,
                 Subject = $"ACE Driving School Booking Confirmation. Booking Id:{booking.Booking_Id}",
                 Body = $"Congratiolations {student.FullName}, you have made a booking of {booking.Lessons.Count} lessons \n" +
-                       $"on {booking.Date_and_Time}\n" +
+                       $"on {booking.Date_and_Time.Date} at {booking.Date_and_Time.TimeOfDay}\n" +
                        $"Make sure to check your paypal account for the receipt \n" +
                        $"Check your bookings: {ViewAllBooking_URL}"
             };

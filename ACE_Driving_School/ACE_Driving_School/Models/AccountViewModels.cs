@@ -117,25 +117,38 @@ namespace ACE_Driving_School.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+        [Required]
         public string Username { get; set; }
+        [Required]
         [Display(Name = "First Name")]
         public string Firstname { get; set; }
+        [Required]
         [Display(Name = "Last Name")]
         public string Lastname { get; set; }
+        [Required]
         [Display(Name = "Address Line 1")]
         public string AddressLine1 { get; set; }
+        [Required]
         [Display(Name = "Address Line 2")]
         public string AddressLine2 { get; set; }
+        [Required]
         public string City { get; set; }
+        [Required]
         public string Postcode { get; set; }
+        [Required]
         [Display(Name ="Date Of Birth")]
         [DataType(DataType.Date)]
         public DateTime Date_Of_Birth{ get; set; }
+        [Required]
         [Display(Name = "Phone Number")]
         [DataType(DataType.PhoneNumber)]
         public string PhoneNumber { get; set; }
+        [Required]
         [Display(Name ="Driving License Number")]
+        [RegularExpression("[A-Z0-9]{5}\\d[0156]\\d([0][1-9]|[12]\\d|3[01])\\d[A-Z0-9]{3}[A-Z]{2}", ErrorMessage = "Please enter a valid driving license number")]
         public string DrivingLicenseNo { get; set; }
+
+        public string Error_Message { get; set; }
     }
 
     public class ResetPasswordViewModel
@@ -145,12 +158,12 @@ namespace ACE_Driving_School.Models
         [Display(Name = "Email")]
         public string Email { get; set; }
 
-        [Required]                                                               //Change back to 8 when finished
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 1)]
+        [Required]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 8)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
-
+        [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]

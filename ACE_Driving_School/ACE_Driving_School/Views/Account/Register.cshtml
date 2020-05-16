@@ -75,7 +75,7 @@
             @Html.LabelFor(m => m.Password)
             @Html.PasswordFor(m => m.Password)
             <br />
-            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger"})
+            @Html.ValidationMessageFor(m => m.Password, $"{ViewBag.ErrorMessage}", new { @class = "text-danger"})
         </div>
         <div class="Register-Textbox">
             @Html.LabelFor(m => m.ConfirmPassword)
@@ -87,7 +87,7 @@
             @Html.LabelFor(m => m.DrivingLicenseNo)
             @Html.EditorFor(m => m.DrivingLicenseNo) 
             <br />
-            @Html.ValidationMessageFor(m => m.DrivingLicenseNo)
+            @Html.ValidationMessageFor(m => m.DrivingLicenseNo, "", new { @class = "text-danger"})
         </div>
 
         <div class="Register-Button">

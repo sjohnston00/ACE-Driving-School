@@ -15,6 +15,7 @@ using ACE_Driving_School.View_Models;
 using System.Web.DynamicData;
 using System.Collections.Generic;
 using System;
+using Microsoft.Ajax.Utilities;
 
 namespace ACE_Driving_School.Controllers
 {
@@ -234,8 +235,11 @@ namespace ACE_Driving_School.Controllers
         //
         // GET: /Account/Register
         [AllowAnonymous]
-        public ActionResult Register()
+        public ActionResult Register(string ErrorMessage)
         {
+            if (!ErrorMessage.IsNullOrWhiteSpace())
+                ViewBag.ErrorMessage = ErrorMessage;
+
             return View();
         }
 
@@ -263,6 +267,11 @@ namespace ACE_Driving_School.Controllers
                     DrivingLicenseNo = model.DrivingLicenseNo
                 };
                 var result = await UserManager.CreateAsync(user, model.Password);
+                if (!result.Succeeded)
+                {
+                    model.Error_Message = result.Errors.First();
+                    return RedirectToAction("Register", new { ErrorMessage = model.Error_Message });
+                }
 
                 //find the student and assign him to the student role
                 Student student = (Student)await UserManager.FindByEmailAsync(model.Email);
