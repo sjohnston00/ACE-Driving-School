@@ -1,53 +1,86 @@
-﻿@model ACE_Driving_School.Models.IndexViewModel
+﻿@model ACE_Driving_School.Models.Student
 @{
     ViewBag.Title = "Manage";
 }
 
+<div class="container container-wrapper">
+    <p class="text-success">@ViewBag.StatusMessage</p>
+    <div>
+        @Html.LabelFor(p => p.First_Name);
+        <span>@Html.DisplayFor(p => p.First_Name)</span>
+        <br />
+        @Html.LabelFor(p => p.Last_Name);
+        <span>@Html.DisplayFor(p => p.Last_Name)</span>
+        <br />
+        @Html.LabelFor(p => p.AddressLine1);
+        <span>@Html.DisplayFor(p => p.AddressLine1)</span>
+        <br />
+        @Html.LabelFor(p => p.AddressLine2);
+        <span>@Html.DisplayFor(p => p.AddressLine2)</span>
+        <br />
+        @Html.LabelFor(p => p.City);
+        <span>@Html.DisplayFor(p => p.City)</span>
+        <br />
+        @Html.LabelFor(p => p.Postcode);
+        <span>@Html.DisplayFor(p => p.Postcode)</span>
+        <br />
 
-<p class="text-success">@ViewBag.StatusMessage</p>
-<div>
-    <h1>Change your account settings</h1>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>Password:</dt>
-        <dd>
-            [
-            @if (Model.HasPassword)
-            {
-                @Html.ActionLink("Change your password", "ChangePassword")
-            }
-            ]
-        </dd>
-        <dt>Phone Number:</dt>
-        <dd>
-            @(Model.PhoneNumber ?? "None")
-            [ @Html.ActionLink("ChangePhoneNumber","ChangePhoneNumber", "Account") ]
-
-        </dd>
-        <dt>Email Confirmed:</dt>
-        @if (Model.EmailConfirmed == "No")
+        @Html.LabelFor(p => p.UserName);
+        <span>@Html.DisplayFor(p => p.UserName)</span>
+        <br />
+        @Html.LabelFor(p => p.Email);
+        <span>@Html.DisplayFor(p => p.Email)</span>
+        <br />
+        <label>Email Confirmed:</label>
+        @if (ViewBag.EmailConfirmed == "No")
         {
-            <dd>@Model.EmailConfirmed <span>You will first need to confirm your email and telephone number before you can make bookings</span> </dd>
-        }
-        else { 
-        <dd>@Model.EmailConfirmed</dd>
-        }
-
-        <dt>Test Date:</dt>
-        @if (Model.TestDate.HasValue)
-        {
-            <dd>@String.Format("dd/MM/yyyy HH:mm", Model.TestDate)</dd>
+            <span>@ViewBag.EmailConfirmed <b id="Confirmation-Highlight">(You will first need to confirm your email and telephone number before you can make bookings)</b></span>
+            <br />
         }
         else
         {
-            <dd>No test dates booked</dd>
+            <span>@ViewBag.EmailConfirmed</span>
+            <br />
+        }
+        @Html.LabelFor(p => p.Date_Of_Birth);
+        <span>@Html.DisplayFor(p => p.Date_Of_Birth)</span>
+        <br />
+        @Html.LabelFor(p => p.DrivingLicenseNo);
+        <span>@Html.DisplayFor(p => p.DrivingLicenseNo)</span>
+        <br />
+
+        <label>Password:</label>
+        <span>@Html.ActionLink("Change your password", "ChangePassword")</span>
+        <br />
+        <label>Phone Number:</label>
+        <span>@Html.DisplayFor(p => p.PhoneNumber)</span>
+        <br />
+        @if (Model.hasPassed)
+        {
+            @Html.LabelFor(p => p.hasPassed):
+            <span>@Html.DisplayFor(p => p.hasPassed)</span>
+            <br />
+            @Html.LabelFor(p => p.PassedDate):
+            <span>@Html.DisplayFor(p => String.Format("dd/MM/yyyy", Model.PassedDate))</span>
+            <br />
+        }
+        else
+        {
+            if (Model.TestDate.HasValue)
+            {
+                <span>@String.Format("dd/MM/yyyy HH:mm", Model.TestDate)</span>
+                <br />
+            }
+            else
+            {
+                <span>No test dates booked</span>
+                <br />
+            }
+
+            <a href="https://www.gov.uk/book-driving-test" class="btn btn-red">Book Your Driving Test</a>
         }
 
-       <a href="https://www.gov.uk/book-driving-test" class="btn btn-primary">Book Your Driving Test</a> 
 
-
-        @Html.ActionLink("Edit Details","EditStudentAccountDetails", "Account",null, new { @class = "btn btn-danger"})
-
-
-    </dl>
+        @Html.ActionLink("Edit Details", "EditStudentAccountDetails", "Account", null, new { @class = "btn btn-red" })
+    </div>
 </div>
