@@ -117,6 +117,8 @@ namespace ACE_Driving_School.Controllers
             string Instructor_Id = User.Identity.GetUserId();
             List<Student> Instructors_Students = context.Users.OfType<Student>()
                                                               .Where(p => p.Most_Recent_Instructor_Id == Instructor_Id)
+                                                              .Where(p => p.TestDate.HasValue)
+                                                              .Where(p => p.hasPassed == false)
                                                               .ToList();
             return View(Instructors_Students);
         }

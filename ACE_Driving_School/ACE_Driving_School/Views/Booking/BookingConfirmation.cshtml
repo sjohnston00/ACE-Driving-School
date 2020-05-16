@@ -3,20 +3,17 @@
 @{
     ViewBag.Title = "Booking Confirmation";
 }
+<div class="container container-wrapper">
+        <div class="Booking-Confirmation">
+            <h1>Booking Confirmation</h1>
+            <h2>Congratiolations <b id="Confirmation-Highlight">@Model.Student.FullName</b> you have purchased an planned <b id="Confirmation-Highlight">@Model.Lesson_Amount</b> lessons!</h2>
+            <h3>Your next lesson will be on the <b id="Confirmation-Highlight">@Model.Lessons.First().Date_And_Time</b></h3>
+            <h3>With <b id="Confirmation-Highlight">@Model.Lessons.First().Instructor.FullName</b> as your instructor</h3>
+            <h3>And you will driving a <b id="Confirmation-Highlight">@Model.Lessons.First().Car.Name</b></h3>
+            <h4>Your Booking Id is: <b id="Confirmation-Highlight">@Model.Booking_Id</b></h4>
 
-<h2>Booking Confirmation</h2>
-    <div class="center">
-
-        <h2>Congratiolations @Model.Student.FullName you have purchased an planned @Model.Lesson_Amount lessons!</h2>
-        <h3>Your next lesson will be on the @Model.Lessons.First().Date_And_Time</h3>
-        <h3>With @Model.Lessons.First().Instructor.FullName as your instructor</h3>
-        <h3>And you will driving @Model.Lessons.First().Car.Name</h3>
-        <p>Your Booking Id is: @Model.Booking_Id</p>
-
-        <p>We've sent a confirmation email to your registered email address: @Model.Student.Email</p>
-        <h4>See You Soon!</h4>
-
-    </div>
-<p>
-    @Html.ActionLink("View All Bookings", "ViewAllBookings")
-</p>
+            <h4>We've sent a confirmation email to your registered email address: <b id="Confirmation-Highlight">@Model.Student.Email</b></h4>
+            <h4>See You Soon!</h4>
+        </div>
+    <p id="ViewAllBookingLink">@Html.ActionLink("View All Bookings", "ViewAllBookings")</p>
+</div>

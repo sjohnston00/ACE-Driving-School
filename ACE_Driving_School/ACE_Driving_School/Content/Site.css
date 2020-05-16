@@ -16,6 +16,18 @@ a:hover {
     background-color: #EE1C25;
     color: white;
 }
+h1 {
+    font-size: 40px;
+    font-weight: 800;
+}
+h2 {
+    font-size: 32px;
+    font-weight: 700;
+}
+h3 {
+    font-size: 26px;
+    font-weight: 600;
+}
 
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
@@ -301,4 +313,47 @@ table-red table, tr, th, td {
     border: none;
     color: #EE1C25;
     text-decoration: underline;
+}
+.container-wrapper {
+    margin-top: 60px;
+}
+.Booking-Confirmation h1{
+    font-size: 40px;
+    font-weight: 700;
+}
+.Booking-Confirmation h2 {
+    font-size: 32px;
+    font-weight: 600;
+}
+.Booking-Confirmation h3 {
+    font-size: 26px;
+    font-weight: 500;
+}
+#Confirmation-Highlight {
+    color: #EE1C25;
+}
+#ViewAllBookingLink {
+    text-align: center;
+    font-size: 32px;
+}
+#ViewBookingHeading {
+    font-size: 40px;
+    font-weight: 700;
+}
+.view-booking-wrapper label{
+    padding-bottom: 5px;
+}
+.view-lesson-wrapper label{
+    padding-bottom: 5px;    
+}
+.view-lesson-wrapper h2 {
+    font-size: 32px;
+    font-weight: 700;
+}
+.view-lesson-instructor-note-wrapper h2{
+    font-size: 32px;
+    font-weight: 700;
+}
+.edit-lesson-container {
+    width: 40%;
 }

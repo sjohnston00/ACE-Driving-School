@@ -3,64 +3,58 @@
 @{
     ViewBag.Title = "EditLesson";
 }
-
-<h2>EditLesson</h2>
-
-
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
+<div class="container container-wrapper text-center edit-lesson-container">
+    <h2>Edit Lesson</h2>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
     
-<div class="form-horizontal">
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(model => model.Dates, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownListFor(model => model.Chossen_Date, new SelectList(Model.Dates, Model.Chossen_Date), new { @class = "form-control", data_val = false })
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Dates, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Chossen_Date, new SelectList(Model.Dates, Model.Chossen_Date), new { @class = "form-control", data_val = false })
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.Times, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownListFor(model => model.Chossen_Time, new SelectList(Model.Times, Model.Chossen_Time), new { @class = "form-control", data_val = false })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Times, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Chossen_Time, new SelectList(Model.Times, Model.Chossen_Time), new { @class = "form-control", data_val = false })
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Duration, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownListFor(model => model.Choosen_Hours, new SelectList(Model.Duration, Model.Choosen_Hours), new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.Duration, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Duration, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Choosen_Hours, new SelectList(Model.Duration, Model.Choosen_Hours), new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Duration, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Instructors, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Chossen_Instructor.Id, new SelectList(Model.Instructors, "Id", "Fullname", Model.Chossen_Instructor), new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Chossen_Instructor.Id, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Car_Type, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Car_Type_Chossen, new SelectList(Model.Car_Type, Model.Car_Type_Chossen), new { @class = "form-control" })
+            </div>
+        </div>
+
+        @Html.HiddenFor(p => p.Lesson_Id)
+
+        <div class="form-group text-center">
+            @Html.ActionLink("Back to List", "Index")
+            <input type="submit" value="Save" class="btn btn-lg btn-red" />
         </div>
     </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.Instructors, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownListFor(model => model.Chossen_Instructor.Id, new SelectList(Model.Instructors, "Id", "Fullname", Model.Chossen_Instructor), new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.Chossen_Instructor.Id, "", new { @class = "text-danger" })
-        </div>
-    </div>
+    }
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Car_Type, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownListFor(model => model.Car_Type_Chossen, new SelectList(Model.Car_Type, Model.Car_Type_Chossen), new { @class = "form-control" })
-        </div>
-    </div>
-
-    @Html.HiddenFor(p => p.Lesson_Id)
-
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Save" class="btn btn-default" />
-        </div>
-    </div>
-</div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
 </div>
 
 @section Scripts {

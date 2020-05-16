@@ -164,6 +164,10 @@ namespace ACE_Driving_School.Controllers
                     //students is trying to access another students booking
                     return Content("Not your booking");
                 booking.Lessons = GetBookingsLessons(booking.Booking_Id);
+                if (booking.Lessons.Count < 1)
+                {
+                    return RedirectToAction("DeleteBooking", new { Booking_Id = booking.Booking_Id });
+                }
                 return View(booking);
             }
             else if (User.IsInRole("Instructor"))
@@ -226,7 +230,7 @@ namespace ACE_Driving_School.Controllers
                 Destination = student.Email,
                 Subject = $"ACE Driving School Booking Confirmation. Booking Id:{booking.Booking_Id}",
                 Body = $"Congratiolations {student.FullName}, you have made a booking of {booking.Lessons.Count} lessons \n" +
-                       $"on {booking.Date_and_Time.Date} at {booking.Date_and_Time.TimeOfDay}\n" +
+                       $"on {booking.Date_and_Time.Date.ToString("dd/MM/yyyy")} at {booking.Date_and_Time.Hour}:{booking.Date_and_Time.Minute}\n" +
                        $"Make sure to check your paypal account for the receipt \n" +
                        $"Check your bookings: {ViewAllBooking_URL}"
             };
