@@ -239,6 +239,7 @@
     <Compile Include="Models\Instructor.cs" />
     <Compile Include="Models\Lesson.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Min17YearOldStudent.cs" />
     <Compile Include="Models\Student.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

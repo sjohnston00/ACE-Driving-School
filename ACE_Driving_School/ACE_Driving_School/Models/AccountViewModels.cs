@@ -138,6 +138,7 @@ namespace ACE_Driving_School.Models
         [Required]
         [Display(Name ="Date Of Birth")]
         [DataType(DataType.Date)]
+        [Min17YearOldStudent]
         public DateTime Date_Of_Birth{ get; set; }
         [Required]
         [Display(Name = "Phone Number")]
