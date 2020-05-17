@@ -38,11 +38,11 @@ namespace ACE_Driving_School.Models
                 {
                     userManager.PasswordValidator = new PasswordValidator()
                     {
-                        RequireDigit = false,
-                        RequiredLength = 1,
-                        RequireLowercase = false,
+                        RequireDigit = true,
+                        RequiredLength = 8,
+                        RequireLowercase = true,
                         RequireNonLetterOrDigit = false,
-                        RequireUppercase = false
+                        RequireUppercase = true
                     };
                     //creating an admin
                     var admin1 = new User()
@@ -59,7 +59,7 @@ namespace ACE_Driving_School.Models
                         Postcode = "LS12 3DS",
                         PhoneNumber = "07429472819"
                     };
-                    userManager.Create(admin1, "admin1");
+                    userManager.Create(admin1, "ACEadmin1");
                     userManager.AddToRole(admin1.Id, "Admin");
                     context.SaveChanges();
 
@@ -86,7 +86,7 @@ namespace ACE_Driving_School.Models
                         "I believe in a rough approach to teaching so be prepared if you pick me"
                       
                     };
-                    userManager.Create(instructor1, "instructor1");
+                    userManager.Create(instructor1, "Instructor1");
                     userManager.AddToRole(instructor1.Id, "Instructor");
                     context.SaveChanges();
 
@@ -109,8 +109,31 @@ namespace ACE_Driving_School.Models
                         hasPassed = false,
                         TestDate = DateTime.Now.Date.AddDays(-1)
                     };
-                    userManager.Create(student1, "student1");
+                    userManager.Create(student1, "ACEstudent1");
                     userManager.AddToRole(student1.Id, "Student");
+                    context.SaveChanges();
+
+                    //creating a student
+                    var student2 = new Student()
+                    {
+                        UserName = "student2",
+                        First_Name = "John",
+                        Last_Name = "Doe",
+                        Date_Of_Birth = new DateTime(1998, 06, 03),
+                        Email = "student2@student2.com",
+                        EmailConfirmed = true,
+                        AddressLine1 = "32 Wakefield Way",
+                        AddressLine2 = "Watford",
+                        City = "London",
+                        Postcode = "LN2 3RD",
+                        PhoneNumber = "07485472617",
+                        Most_Recent_Instructor_Id = instructor1.Id,
+                        DrivingLicenseNo = "MORGA753116SM9IJ",
+                        hasPassed = true,
+                        PassedDate = DateTime.Now.Date
+                    };
+                    userManager.Create(student2, "ACEstudent2");
+                    userManager.AddToRole(student2.Id, "Student");
                     context.SaveChanges();
 
                     //------creating a booking---------
