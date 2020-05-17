@@ -4,6 +4,7 @@ body {
     padding-top: 50px;
     padding-bottom: 20px;
     font-family: 'Poppins', sans-serif;
+    overflow: scroll;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -192,6 +193,13 @@ table-red table, tr, th, td {
 .register-form {
     padding-top: 50px;
 }
+.register-form textarea {
+    border: 1.5px solid #EE1C25;
+    min-width: 100%;
+    max-width: 100%;
+    min-height: 100px;
+    max-height: 300px;
+}
 .register-form h4 {
     font-size: 30px;
     font-weight: 600;
@@ -227,7 +235,8 @@ table-red table, tr, th, td {
     transform: translateY(-50%);
 }
 
-.box-left-input select, .box-left-input select :focus{
+.box-left-input select, .box-left-input select:focus{
+    width: 70%;
     text-align: center;
     padding: 5px 10px;
     font-size: 22px;
@@ -386,3 +395,47 @@ table-red table, tr, th, td {
 .View-All-Bookings {
     height: 80vh;
 }
+
+@media only screen and (max-width: 1024px)  {
+    .logo{
+        display: none;
+    }
+    .flex-box {
+        display: block;
+        width: 100%;
+    }
+    .flex-box .box {
+        width: 100%;
+        margin: 0 auto;
+        
+    }
+    .box, .box-left {
+        width: 80%;
+        margin: 0 auto;
+    }
+    .box-left-login-page {
+        border-right: none;
+        border-bottom: 5px solid #EE1C25;
+    }
+    .box-left-lesson-amount-page {
+        border-right: none;
+        border-bottom: 5px solid #EE1C25;
+    }
+    .Choosen-Lesson-Form {
+        width: 50%;
+        margin: 20px auto;
+    }
+    .About-Us {
+        padding-top: 40px;
+        position: absolute;
+        width: 100%;
+    }
+    .Home-Body-Heading h2{
+        display: block;
+        width: 100%;
+    }
+    .home-header-text{
+        display: none;
+    }
+}
+

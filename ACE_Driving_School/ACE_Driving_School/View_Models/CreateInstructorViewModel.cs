@@ -13,8 +13,8 @@ namespace ACE_Driving_School.View_Models
         [Display(Name = "Email")]
         public string Email { get; set; }
 
-        [Required]                                                                      //Change back to 8 when finished
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 1)]
+        [Required]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 8)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
@@ -58,10 +58,8 @@ namespace ACE_Driving_School.View_Models
         [Display(Name = "Phone Number")]
         [DataType(DataType.PhoneNumber)]
         public string PhoneNumber { get; set; }
-        [Required]
         [DataType(DataType.MultilineText)]
         public string Bio { get; set; }
-        
         [Required]
         [Display(Name ="Experience Years")]
         public int Experience_Years { get; set; }

@@ -36,10 +36,13 @@ namespace ACE_Driving_School.Models
             }
         }
         [Required]
+        [Display(Name = "Date Of Birth")]
         public DateTime Date_Of_Birth { get; set; }
         [Required]
+        [Display(Name = "Address Line 1")]
         public string AddressLine1 { get; set; }
         [Required]
+        [Display(Name = "Address Line 2")]
         public string AddressLine2 { get; set; }
         [Required]
         public string City { get; set; }
