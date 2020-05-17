@@ -2,14 +2,15 @@
 @{
     ViewBag.Title = "Instructor Home";
 }
+<div class="container container-wrapper">
+    <h2>Instructor Home</h2>
 
-<h2>Instructor Home</h2>
+    @Html.ActionLink("View Todays Lessons","TodaysLessons")
+    <hr />  
+    @Html.ActionLink("Reports","GeneratePDFReports")
+    <hr />
+    @Html.ActionLink("View All My Lessons", "ViewAllLessons", "Lesson")
+    <hr />
+    @Html.ActionLink("Mark Student As Passed", "MarkStudentsAsPassed")
 
-@Html.ActionLink("View Todays Lessons","TodaysLessons")
-<hr />  
-@Html.ActionLink("Reports","GeneratePDFReports")
-<hr />
-@Html.ActionLink("View All My Lessons", "ViewAllLessons", "Lesson")
-<hr />
-@Html.ActionLink("Mark Student As Passed", "MarkStudentsAsPassed")
-
+</div>

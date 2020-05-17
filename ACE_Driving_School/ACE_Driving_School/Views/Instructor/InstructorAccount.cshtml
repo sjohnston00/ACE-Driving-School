@@ -3,109 +3,60 @@
 @{
     ViewBag.Title = "Instructor Account";
 }
+<div class="container container-wrapper">
+    <h2>Instructor Account</h2>
+    <div>
+        @Html.LabelFor(model => model.Email):
+        <span>@Html.DisplayFor(p => p.Email)</span>
+        <br />
+        
+        @Html.LabelFor(model => model.PhoneNumber):
+        <span>@Html.DisplayFor(p => p.PhoneNumber)</span>
+        <br />
+        
+        @Html.LabelFor(model => model.UserName):
+        <span>@Html.DisplayFor(p => p.UserName)</span>
+        <br />
+                
+        @Html.LabelFor(model => model.First_Name):
+        <span>@Html.DisplayFor(p => p.First_Name)</span>
+        <br />
+        
+        @Html.LabelFor(model => model.Last_Name):
+        <span>@Html.DisplayFor(p => p.Last_Name)</span>
+        <br />
+        
+        @Html.LabelFor(model => model.Date_Of_Birth):
+        <span>@String.Format("dd/MM/yyyy", Model.Date_Of_Birth)</span>
+        <br />
+        
+        @Html.LabelFor(model => model.AddressLine1):
+        <span>@Html.DisplayFor(p => p.AddressLine1)</span>
+        <br />
+        
+        @Html.LabelFor(model => model.AddressLine2):
+        <span>@Html.DisplayFor(p => p.AddressLine2)</span>
+        <br />
+        
+        @Html.LabelFor(model => model.City):
+        <span>@Html.DisplayFor(p => p.City)</span>
+        <br />
+        
+        @Html.LabelFor(model => model.Postcode):
+        <span>@Html.DisplayFor(p => p.Postcode)</span>
+        <br />
+        
+        @Html.LabelFor(model => model.Bio):
+        <span>@Html.DisplayFor(p => p.Bio)</span>
+        <br />
+        
+        @Html.LabelFor(model => model.Experience_Years):
+        <span>@Html.DisplayFor(p => p.Experience_Years)</span>
+        <br />
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "EditDetails") |
+        @Html.ActionLink("Back", "InstructorHome")
+    </p>
 
-<h2>Instructor Account</h2>
-
-<div>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PhoneNumber)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PhoneNumber)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.UserName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UserName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.First_Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.First_Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Last_Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Last_Name)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Date_Of_Birth)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Date_Of_Birth)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.AddressLine1)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AddressLine1)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.AddressLine2)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AddressLine2)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.City)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.City)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Postcode)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Postcode)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Bio)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Bio)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Experience_Years)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Experience_Years)
-        </dd>
-    </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "EditDetails") |
-    @Html.ActionLink("Back to List", "Index")
-</p>

@@ -3,17 +3,15 @@
 @{
     ViewBag.Title = "Todays Lessons";
 }
-
-<h2>Todays Lessons</h2>
-
-
-@if (!Model.Any() || Model == null)
-{
+<div class="container container-wrapper">
+    <h2>Todays Lessons</h2>
+    @if (!Model.Any() || Model == null)
+    {
     <p>No lessons today you have the day off</p>
-}
-else
-{
-    <table class="table">
+    }
+    else
+    {
+    <table class="table table-red">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Date_And_Time)
@@ -63,14 +61,13 @@ else
                 @Html.DisplayFor(modelItem => item.Status)
             </td>
             <td>
-                
                 @if (item.Status == "Incomplete")
                 {
-                     <span>|</span>@Html.ActionLink("Mark As Complete", "MarkLessonAsComplete", new { id = item.Lesson_Id })
+                        <span>|</span>@Html.ActionLink("Mark As Complete", "MarkLessonAsComplete", new { id = item.Lesson_Id })
                 }
             </td>
         </tr>
     }
-
     </table>
-}
+    }
+</div>
