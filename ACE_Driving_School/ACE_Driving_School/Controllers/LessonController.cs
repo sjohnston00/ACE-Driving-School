@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Web;
 using System.Web.Mvc;
 
@@ -85,13 +86,15 @@ namespace ACE_Driving_School.Controllers
             }
         }
         [HttpGet]
-        public ActionResult CreateLesson(int? LessonInBooking, int amount, int? booking_id)
+        public ActionResult CreateLesson(int? LessonInBooking, int amount, int? booking_id, string ErrorMessage)
         {
             if (!LessonInBooking.HasValue)
-            {
                 //if is doesnt have a value if means its the first lesson in the booking
                 LessonInBooking = 1;
-            }
+
+            if (!ErrorMessage.IsNullOrWhiteSpace())
+                ViewBag.ErrorMessage = ErrorMessage;
+
             //If the instructor hasnt been choosen dont display a list of times
             CreateLessonViewModel newLesson = new CreateLessonViewModel();
             InstructorController instructor_Controller = new InstructorController();
@@ -163,6 +166,16 @@ namespace ACE_Driving_School.Controllers
                     Instructor_Id = instructor.Id,
                     Instructor_Note = "N/A"
                 };
+                
+                //check that the student doesnt book a lesson at the same time as someone else
+                List<Lesson> AllLessons = GetAllLessons();
+                foreach (var item in AllLessons)
+                {
+                    if (item.Date_And_Time == lesson.Date_And_Time)
+                    {
+                        return RedirectToAction("CreateLesson", new { LessonInBooking = model.LessonInBooking, amount = model.Choosen_Amount, booking_id = model.Booking_Id, ErrorMessage = "Someone else has this lesson booked"});
+                    }
+                }
                 
                 
                 context.Lessons.Add(lesson);
@@ -354,6 +367,13 @@ namespace ACE_Driving_School.Controllers
             string StudentId = User.Identity.GetUserId();
             Student student = (Student)context.Users.Find(StudentId);
             return student;
+        }
+
+        public List<Lesson> GetAllLessons()
+        {
+            List<Lesson> AllLesson = context.Lessons.ToList();
+
+            return AllLesson;
         }
         public decimal CalculateLessonPrice(int LessonAmount)
         {
