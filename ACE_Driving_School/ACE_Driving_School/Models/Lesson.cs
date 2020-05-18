@@ -35,7 +35,7 @@ namespace ACE_Driving_School.Models
         public Instructor Instructor { get; set; }
 
         [ForeignKey("Car")]
-        public string Car_Id { get; set; }
+        public int Car_Id { get; set; }
         public Car Car { get; set; }
         
     }

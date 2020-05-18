@@ -319,11 +319,18 @@ namespace ACE_Driving_School.Controllers
                                                                   .Include(p => p.Car)
                                                                   .Include(p => p.Instructor)
                                                                   .FirstOrDefault();
+
+            
             AddInstructorNoteViewModel viewModel = new AddInstructorNoteViewModel()
             {
                 Instructor_Id = lesson.Instructor_Id,
                 Lesson_Id = lesson.Lesson_Id,
             };
+
+            if (lesson.Instructor_Note != "N/A")
+            {
+                viewModel.Note = lesson.Instructor_Note;
+            }
             return View(viewModel);
         }
 

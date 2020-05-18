@@ -39,6 +39,7 @@ h3 {
 input:focus {
     outline: none;
 }
+
 .logo{
     height: 90px;
     width: 100px;
@@ -386,10 +387,16 @@ table-red table, tr, th, td {
     justify-content: center;
     margin: 20px 0;
 }
+.flex-box-about-us {
+    border-bottom: 5px solid #EE1C25;
+}
 .About-Us {
     height: 50%;
 }
 .Contact-Us {
+    height: 100%;
+}
+.Pricing{
     height: 50%;
 }
 .View-All-Bookings {
@@ -425,10 +432,21 @@ table-red table, tr, th, td {
         width: 50%;
         margin: 20px auto;
     }
+    .box-left-about-us {
+        height: 50%;
+    }
+    .flex-box-about-us {
+         padding-bottom: 20px;
+    }
     .About-Us {
+        display: block;
         padding-top: 40px;
-        position: absolute;
+        padding-bottom: 20px;
+        border-bottom: 5px solid #EE1C25;
+    }
+    .Pricing{
         width: 100%;
+        height: 100%;
     }
     .Home-Body-Heading h2{
         display: block;

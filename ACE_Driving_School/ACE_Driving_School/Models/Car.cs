@@ -11,15 +11,22 @@ namespace ACE_Driving_School.Models
     {
         [Key]
         [Display(Name ="Car Id")]
-        public string Car_Id { get; set; }
+        public int Car_Id { get; set; }
         [NotMapped]
         public string Name { get { return $"{Year.Year} {Make} {Model}"; } }
+        [Required]
         public string Make { get; set; }
+        [Required]
         public string Model { get; set; }
+        [Required]
+        [DataType(DataType.Date)]
         public DateTime Year { get; set; }
+        [Required]
         public int Miles { get; set; }
+        [Required]
         [Display(Name ="Registration Plate")]
         public string Registration_Plate { get; set; }
+        [Required]
         [Display(Name = "Gear Type")]
         public string Gear_Type { get; set; }
     }

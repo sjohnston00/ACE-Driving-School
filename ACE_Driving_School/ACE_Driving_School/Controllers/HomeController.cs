@@ -20,8 +20,11 @@ namespace ACE_Driving_School.Controllers
         /// <returns>List of Students to the view</returns>
         public ActionResult Index(string Error_Message)
         {
-            
+            if (!Error_Message.IsNullOrWhiteSpace())
+                ViewBag.ErrorMessage = Error_Message;
+
             List<Student> Most_Recent_Passed_Students = Get_Most_Recent_Passed_Students();
+            
             return View(Most_Recent_Passed_Students);
         }
 

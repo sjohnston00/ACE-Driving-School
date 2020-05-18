@@ -14,6 +14,7 @@ namespace ACE_Driving_School.Models
 
         [DataType(DataType.MultilineText)]
         public string Bio { get; set; }
+        [Display (Name = "Experience Years")]
         public int Experience_Years { get; set; }
 
 

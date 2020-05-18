@@ -38,14 +38,20 @@
     <p>
         @if (User.IsInRole("Instructor"))
         {
-            @Html.ActionLink("Add Note", "AddInstructorNote", "Lesson", new { Lesson_Id = Model.Lesson_Id},null) <span>|</span>
+            if (Model.Instructor_Note != "N/A")
+            {
+                @Html.ActionLink("Change Note", "AddInstructorNote", "Lesson", new { Lesson_Id = Model.Lesson_Id }, null) <span>|</span>
+            }else
+            {
+                @Html.ActionLink("Add Note", "AddInstructorNote", "Lesson", new { Lesson_Id = Model.Lesson_Id }, null) <span>|</span>
+            }
         }
         @if (User.IsInRole("Student"))
         {
             @Html.ActionLink("Edit", "EditLesson", new { Lesson_Id = Model.Lesson_Id }) <span>|</span>
         }
-        @Html.ActionLink("Delete Lesson", "DeleteLesson", new { Lesson_Id = Model.Lesson_Id }, new { onclick = "return confirm('Are you sure you want to delete this lesson?')"}) |
-        @Html.ActionLink("Back to booking", "ViewBooking", "Booking", new { Booking_Id = Model.Booking_Id },null)
+        @Html.ActionLink("Delete Lesson", "DeleteLesson", new { Lesson_Id = Model.Lesson_Id }, new { onclick = "return confirm('Are you sure you want to delete this lesson?')" }) |
+        @Html.ActionLink("Back to booking", "ViewBooking", "Booking", new { Booking_Id = Model.Booking_Id }, null)
     </p>
 
 </div>

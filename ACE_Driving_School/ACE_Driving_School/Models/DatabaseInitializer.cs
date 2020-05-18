@@ -148,7 +148,7 @@ namespace ACE_Driving_School.Models
                     //--------creating a car for lesson-------
                     var car1 = new Car 
                     {
-                        Car_Id = "1",
+                        Car_Id = 1,
                         Make = "Peugeot",
                         Miles = 2000,
                         Model = "207",
@@ -158,7 +158,7 @@ namespace ACE_Driving_School.Models
                     };
                     var car2 = new Car 
                     {
-                        Car_Id = "2",
+                        Car_Id = 1,
                         Make = "Tesla",
                         Miles = 1000,
                         Model = "Model S",

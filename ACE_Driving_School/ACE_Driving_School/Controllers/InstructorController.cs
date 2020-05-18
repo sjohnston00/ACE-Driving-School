@@ -82,6 +82,8 @@ namespace ACE_Driving_School.Controllers
         {
             if (!User.Identity.IsAuthenticated)
                 return RedirectToAction("Login", "Account");
+            if (User.IsInRole("Student"))
+                return RedirectToAction("Index", "Home", new { Error_Message = "Can't access that page"});
 
             string Instructor_Id = User.Identity.GetUserId();
             Instructor instructor = (Instructor)context.Users.Find(Instructor_Id);
