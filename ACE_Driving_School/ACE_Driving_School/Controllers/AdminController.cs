@@ -160,7 +160,10 @@ namespace ACE_Driving_School.Controllers
 
         public ActionResult ChangeLessonPrice()
         {
-
+            //will look at this in future development
+            //will need to have a table in the database with the current lesson prices
+            // then be able to change them there
+            //and have all the others page load the info from the database
             return View();
         }
 

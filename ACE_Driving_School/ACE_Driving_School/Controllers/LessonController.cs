@@ -91,6 +91,8 @@ namespace ACE_Driving_School.Controllers
             if (!LessonInBooking.HasValue)
                 //if is doesnt have a value if means its the first lesson in the booking
                 LessonInBooking = 1;
+            if (!booking_id.HasValue)
+                return RedirectToAction("ChooseLessonAmount", new { Error_Message = "No Booking Id" });
 
             if (!ErrorMessage.IsNullOrWhiteSpace())
                 ViewBag.ErrorMessage = ErrorMessage;
@@ -197,8 +199,11 @@ namespace ACE_Driving_School.Controllers
             context.SaveChanges();
             return RedirectToAction("PayForBooking", "Payment", new { Booking_Id = booking.Booking_Id});
         }
-        public ActionResult LessonDetails(int Lesson_Id)
+        public ActionResult LessonDetails(int? Lesson_Id)
         {
+            if (!Lesson_Id.HasValue)
+                return RedirectToAction("ViewAllBookings", "Booking");
+
             Lesson lesson = context.Lessons.Where(p => p.Lesson_Id == Lesson_Id)
                                                  .Include(p => p.Student)
                                                  .Include(p => p.Instructor)
@@ -285,8 +290,10 @@ namespace ACE_Driving_School.Controllers
             return RedirectToAction("LessonDetails", new { Lesson_Id = UpdatedLesson.Lesson_Id});
         }
 
-        public ActionResult DeleteLesson(int Lesson_Id)
+        public ActionResult DeleteLesson(int? Lesson_Id)
         {
+            if (!Lesson_Id.HasValue)
+                return RedirectToAction("Index", "Home", new { Error_Message = "No Lesson Id" });
             //add an alert asking the user is they want to confirm the deletion of the lessons
             Lesson lesson = context.Lessons.Where(p => p.Lesson_Id == Lesson_Id)
                                                                   .Include(p => p.Booking)
@@ -307,7 +314,7 @@ namespace ACE_Driving_School.Controllers
         public ActionResult AddInstructorNote(int? Lesson_Id)
         {
             if (!Lesson_Id.HasValue)
-                return HttpNotFound();
+                return RedirectToAction("InstructorHome", "Instructor");
 
             if (!User.Identity.IsAuthenticated || !User.IsInRole("Instructor"))
                 return RedirectToAction("Login", "Account");
@@ -351,8 +358,10 @@ namespace ACE_Driving_School.Controllers
             return RedirectToAction("LessonDetails", new { Lesson_Id = lesson.Lesson_Id});
         }
         
-        public ActionResult MarkLessonComplete(int Lesson_Id)
+        public ActionResult MarkLessonComplete(int? Lesson_Id)
         {
+            if (!Lesson_Id.HasValue)
+                return RedirectToAction("InstructorHome", "Instructor");
             Lesson lesson = context.Lessons.Find(Lesson_Id);
             lesson.Status = "Complete";
             context.SaveChanges();

@@ -19,8 +19,11 @@ namespace ACE_Driving_School.Controllers
             return View();
         }
 
-        public ActionResult PayForBooking(int Booking_Id)
+        public ActionResult PayForBooking(int? Booking_Id)
         {
+
+            if (!Booking_Id.HasValue)
+                return RedirectToAction("ChoosenLessonAmount", "Booking", new { Error_Message = "No Booking Id" });
             string Student_Id = User.Identity.GetUserId();
             if (Student_Id == null || Student_Id == "")
             {

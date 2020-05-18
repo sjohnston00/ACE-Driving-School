@@ -13,6 +13,7 @@ using System.Web.Mvc;
 
 namespace ACE_Driving_School.Controllers
 {
+    [Authorize]
     public class BookingController : Controller
     {
         private ACE_Driving_School_Db_Context context = new ACE_Driving_School_Db_Context();
@@ -79,8 +80,11 @@ namespace ACE_Driving_School.Controllers
         /// </summary>
         /// <param name="booking"></param>
         /// <returns></returns>
-        public ActionResult CreateBooking(int Chossen_Amount)
+        public ActionResult CreateBooking(int? Chossen_Amount)
         {
+            if (!Chossen_Amount.HasValue)
+                return RedirectToAction("ChooseLessonAmount", new { Error_Message = "No Choosen Amount" });
+
             if (ModelState.IsValid)
             {
                     Student student = GetLoggedInStudent();
@@ -93,7 +97,7 @@ namespace ACE_Driving_School.Controllers
                 Booking booking = new Booking()
                 {
                     Date_and_Time = DateTime.Now,
-                    Lesson_Amount = Chossen_Amount,
+                    Lesson_Amount = Chossen_Amount.Value,
                     Payment_Status = "Incomplete",
                     Price = 0, //set to 0 when a new booking, and update once lessons have all be added
                     Student = student,
@@ -109,8 +113,10 @@ namespace ACE_Driving_School.Controllers
                             "<a href=\"javascript: history.go(-1)\">Go Back</a>");
         }
 
-        public ActionResult BookingConfirmation(int Booking_Id)
+        public ActionResult BookingConfirmation(int? Booking_Id)
         {
+            if (!Booking_Id.HasValue)
+                return RedirectToAction("ChooseLessonAmount", new { Error_Message = "No Booking Id" });
             Booking booking = context.Bookings.Where(p => p.Booking_Id == Booking_Id)
                                                     .Include(p => p.Student).FirstOrDefault();
             booking.Lessons = GetBookingsLessons(booking.Booking_Id);
@@ -120,12 +126,15 @@ namespace ACE_Driving_School.Controllers
             SendCreateBookingConfirmationEmail(booking.Student, booking);
             return View(booking);
         }
-        public ActionResult DeleteBooking(int Booking_Id)
+        public ActionResult DeleteBooking(int? Booking_Id)
         {
+            if (!Booking_Id.HasValue)
+                return RedirectToAction("Index", "Home", new { Error_Message = "No Booking Id" });
             //add alert to warn a user that this will delete all the lessons too
             Booking booking = context.Bookings.Where(p => p.Booking_Id == Booking_Id)
                                                     .Include(p => p.Student)
                                                     .FirstOrDefault();
+
             booking.Lessons = GetBookingsLessons(booking.Booking_Id);
 
             //delete all the lessons first
@@ -339,8 +348,12 @@ namespace ACE_Driving_School.Controllers
         }
 
         
-        public List<Lesson> GetBookingsLessons(int Booking_Id)
+        public List<Lesson> GetBookingsLessons(int? Booking_Id)
         {
+
+            if (!Booking_Id.HasValue)
+                return null;
+
             List<Lesson> LessonsOfBooking = context.Lessons.Where(p => p.Booking_Id == Booking_Id)
                                                                  .Include(p => p.Car)
                                                                  .Include(p => p.Student)
